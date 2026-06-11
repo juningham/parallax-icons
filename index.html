@@ -3,118 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Center — Parallax Nav</title>
+  <title>Parallax Nav Icons</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      background: #e9ebed;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    html, body {
+      height: 100%;
       font-family: system-ui, -apple-system, sans-serif;
-      user-select: none;
     }
 
-    /* ── Browser chrome shell ── */
-    .browser {
-      width: 980px;
-      height: 680px;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.28), 0 8px 24px rgba(0,0,0,0.16);
-      display: flex;
-      flex-direction: column;
+    /* ── Product grid — exact from navigation.product ── */
+    [data-garden-id="navigation.product"] {
+      display: grid;
+      grid-template-areas:
+        "banner banner banner"
+        "header header header"
+        "nav    main   sheet";
+      grid-template-columns: 56px 1fr;
+      grid-template-rows: 0px 48px 1fr;
+      width: 100vw;
+      height: 100vh;
+      background: #f8f9f9;
     }
 
-    .browser-bar {
-      height: 52px;
-      background: #e8e8e8;
-      border-bottom: 1px solid #ccc;
-      display: flex;
-      align-items: center;
-      padding: 0 16px;
-      gap: 12px;
-      flex-shrink: 0;
-    }
-
-    .traffic-lights {
-      display: flex;
-      gap: 6px;
-    }
-    .traffic-lights span {
-      width: 12px; height: 12px;
-      border-radius: 50%;
-    }
-    .tl-red   { background: #ff5f57; }
-    .tl-yellow{ background: #ffbd2e; }
-    .tl-green { background: #28c840; }
-
-    .address-bar {
-      flex: 1;
-      max-width: 340px;
-      margin: 0 auto;
-      height: 28px;
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      padding: 0 10px;
-      font-size: 12px;
-      color: #555;
-      gap: 6px;
-    }
-    .address-bar svg { flex-shrink: 0; }
-
-    /* ── Zendesk product chrome ── */
-    .zd-chrome {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      background: #fff;
-    }
-
-    /* Top bar */
-    .top-bar {
-      height: 48px;
-      background: #fff;
-      border-bottom: 1px solid #e9ebed;
+    /* ── Header ── */
+    [data-garden-id="navigation.header"] {
+      grid-area: header;
       display: flex;
       align-items: center;
       padding: 0 16px;
-      gap: 12px;
-      flex-shrink: 0;
+      gap: 8px;
+      background: #fff;
+      border-bottom: 1px solid #d8dcde;
+      z-index: 10;
     }
 
-    .zd-logo {
+    .header-brand {
       display: flex;
       align-items: center;
       gap: 8px;
-      color: #1f1f2e;
+      flex-shrink: 0;
     }
-    .zd-logo svg { width: 24px; height: 24px; }
+    .header-brand svg { width: 24px; height: 24px; }
 
-    .product-name {
+    .header-product-name {
       font-size: 14px;
       font-weight: 600;
       color: #1f1f2e;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
+    }
+    .header-product-name svg { color: #68737d; }
+
+    .header-sep {
+      width: 1px;
+      height: 20px;
+      background: #d8dcde;
+      flex-shrink: 0;
     }
 
-    .account-name {
+    .header-account {
       font-size: 13px;
       color: #68737d;
-      margin-left: 4px;
     }
 
-    .top-bar-search {
+    .header-search {
       flex: 1;
-      max-width: 360px;
+      max-width: 400px;
       margin-left: auto;
       height: 32px;
       border: 1px solid #d8dcde;
@@ -125,122 +81,138 @@
       gap: 6px;
       font-size: 13px;
       color: #68737d;
+      background: #fff;
     }
 
-    .top-bar-actions {
+    .header-actions {
       display: flex;
       align-items: center;
-      gap: 4px;
-      margin-left: 12px;
+      gap: 2px;
+      flex-shrink: 0;
     }
-    .top-bar-icon {
+    .header-icon-btn {
       width: 32px; height: 32px;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       color: #68737d;
       cursor: pointer;
+      background: transparent;
+      border: none;
     }
-    .top-bar-avatar {
+    .header-icon-btn:hover { background: rgba(0,0,0,0.05); }
+    .header-avatar {
       width: 32px; height: 32px;
       border-radius: 50%;
       background: #8b5cf6;
       display: flex; align-items: center; justify-content: center;
-      color: #fff;
-      font-size: 12px;
-      font-weight: 600;
+      color: #fff; font-size: 12px; font-weight: 600;
+      cursor: pointer;
     }
 
-    /* ── Body: nav + content ── */
-    .body {
-      flex: 1;
-      display: flex;
-      overflow: hidden;
-    }
-
-    /* ── Primary nav rail ── */
-    .nav-rail {
-      width: 52px;
-      background: #1f1f2e;
+    /* ── Nav rail — exact from navigation.nav ── */
+    [data-garden-id="navigation.nav"] {
+      grid-area: nav;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 8px 0;
-      gap: 2px;
-      flex-shrink: 0;
+      width: 56px;
+      padding: 12px 0;
+      background: #fff;
+      border-right: 1px solid #d8dcde;
+      z-index: 5;
     }
 
-    .nav-logo {
-      width: 40px;
-      height: 40px;
+    [data-garden-id="navigation.nav-list"] {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      gap: 0;
+    }
+
+    [data-garden-id="navigation.nav-item"] {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Nav button — exact: 56×48px, no border-radius, transparent */
+    [data-garden-id="navigation.nav-button"] {
+      position: relative;
+      width: 56px;
+      height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
-      margin-bottom: 8px;
-      flex-shrink: 0;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      color: #293239;
+      cursor: pointer;
+      padding: 0;
     }
 
-    .nav-divider {
-      width: 28px;
-      height: 1px;
-      background: rgba(255,255,255,0.12);
-      margin: 4px 0;
-      flex-shrink: 0;
-    }
-
-    .nav-spacer { flex: 1; }
-
-    /* Nav item button */
-    .nav-item {
-      position: relative;
-      width: 40px;
-      height: 40px;
+    /* Content span — the 32×32 pill that gets highlighted */
+    [data-garden-id="navigation.nav-button-content"] {
+      width: 32px;
+      height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 8px;
-      border: none;
       background: transparent;
-      color: rgba(255,255,255,0.55);
-      cursor: pointer;
-      flex-shrink: 0;
-      transition: background 0.15s ease, color 0.15s ease;
-      overflow: visible;
+      transition: background 0.15s ease;
+      position: relative;
     }
 
-    .nav-item:hover {
-      background: rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.9);
+    [data-garden-id="navigation.nav-button"]:hover
+    [data-garden-id="navigation.nav-button-content"] {
+      background: rgba(41, 50, 57, 0.08);
     }
 
-    .nav-item.active {
-      background: rgba(255,255,255,0.14);
+    [data-garden-id="navigation.nav-button"][aria-current="true"]
+    [data-garden-id="navigation.nav-button-content"] {
+      background: #293239;
       color: #fff;
     }
 
     /* Tooltip */
-    .nav-item::after {
+    [data-garden-id="navigation.nav-button"]::after {
       content: attr(aria-label);
       position: absolute;
       left: calc(100% + 12px);
       top: 50%;
       transform: translateY(-50%);
-      background: #1f1f2e;
+      background: #293239;
       color: #fff;
-      font-size: 11px;
+      font-size: 12px;
       white-space: nowrap;
-      padding: 4px 8px;
+      padding: 5px 10px;
       border-radius: 4px;
       pointer-events: none;
       opacity: 0;
       transition: opacity 0.1s ease;
       z-index: 100;
     }
-    .nav-item:hover::after {
-      opacity: 1;
+    [data-garden-id="navigation.nav-button"]:hover::after { opacity: 1; }
+
+    /* Separator — exact: 24px wide, #d8dcde, margin 8px 16px */
+    [data-garden-id="navigation.nav-separator"] {
+      width: 24px;
+      height: 1px;
+      background: #d8dcde;
+      border: none;
+      margin: 8px 16px;
     }
 
-    /* ── Parallax stage inside nav-item ── */
+    /* Spacer pushes separator + last item to bottom */
+    .nav-spacer {
+      flex: 1;
+      min-height: 8px;
+    }
+
+    /* ── Parallax stage inside the content span ── */
     .stage {
       position: relative;
       width: 20px;
@@ -254,7 +226,7 @@
       align-items: center;
       justify-content: center;
       color: inherit;
-      transform: translate3d(0,0,0);
+      transform: translate3d(0, 0, 0);
       transition: transform 0.4s cubic-bezier(0.2, 0, 0.1, 1);
     }
     .layer svg {
@@ -263,425 +235,325 @@
       overflow: visible;
     }
 
-    .nav-item:hover .layer {
+    [data-garden-id="navigation.nav-button"]:hover .layer {
       transition: transform 0.1s cubic-bezier(0.2, 0, 0.1, 1);
     }
 
-    .layer[data-depth="shadow"] { opacity: 0.1; filter: blur(1px); }
-    .layer[data-depth="back"]   { opacity: 0.4; }
-    .layer[data-depth="mid"]    { opacity: 0.7; }
+    .layer[data-depth="shadow"] { opacity: 0.08; filter: blur(1px); }
+    .layer[data-depth="back"]   { opacity: 0.35; }
+    .layer[data-depth="mid"]    { opacity: 0.65; }
     .layer[data-depth="front"]  { opacity: 1; }
     .layer[data-role="fill"]    { opacity: 0.75; }
-    .layer[data-role="stroke"]  { opacity: 0.5; }
+    .layer[data-role="stroke"]  { opacity: 0.45; }
+
+    /* Invert layer opacities when button is active (white icon on dark pill) */
+    [data-garden-id="navigation.nav-button"][aria-current="true"] .layer[data-depth="back"]  { opacity: 0.5; }
+    [data-garden-id="navigation.nav-button"][aria-current="true"] .layer[data-depth="front"] { opacity: 1; }
+    [data-garden-id="navigation.nav-button"][aria-current="true"] .layer[data-role="fill"]   { opacity: 0.8; }
+    [data-garden-id="navigation.nav-button"][aria-current="true"] .layer[data-role="stroke"] { opacity: 0.55; }
 
     /* ── Main content area ── */
-    .content {
-      flex: 1;
+    [data-garden-id="navigation.main"] {
+      grid-area: main;
       background: #fff;
-      padding: 32px 40px;
       overflow-y: auto;
+      padding: 32px 40px;
     }
 
-    .content h2 {
-      font-size: 26px;
-      font-weight: 600;
-      color: #1f1f2e;
-      margin-bottom: 4px;
-    }
-    .content .subtitle {
-      font-size: 14px;
-      color: #68737d;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 24px;
-    }
-    .content .subtitle svg {
-      color: #8b5cf6;
-    }
-
-    .chips {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 32px;
-    }
-    .chip {
-      padding: 6px 14px;
-      border: 1px solid #d8dcde;
-      border-radius: 100px;
-      font-size: 13px;
-      color: #2f3941;
-      cursor: pointer;
-    }
-
-    .section-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: #1f1f2e;
-      margin-bottom: 12px;
-    }
-
-    .insight-card {
-      border: 1px solid #e9ebed;
-      border-radius: 8px;
-      padding: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-      margin-bottom: 32px;
-    }
-    .insight-illustration {
-      width: 80px;
-      height: 64px;
-      background: #f3f4f6;
-      border-radius: 8px;
-      flex-shrink: 0;
-    }
-    .insight-text h3 { font-size: 15px; font-weight: 600; color: #2f3941; margin-bottom: 4px; }
-    .insight-text p  { font-size: 13px; color: #68737d; margin-bottom: 6px; }
-    .insight-text a  { font-size: 13px; color: #1f73b7; text-decoration: none; }
+    .content-heading { font-size: 24px; font-weight: 600; color: #1f1f2e; margin-bottom: 4px; }
+    .content-sub { font-size: 14px; color: #68737d; display: flex; align-items: center; gap: 6px; margin-bottom: 24px; }
+    .content-sub svg { color: #8b5cf6; flex-shrink: 0; }
+    .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+    .chip { padding: 6px 14px; border: 1px solid #d8dcde; border-radius: 100px; font-size: 13px; color: #2f3941; }
+    .section-title { font-size: 15px; font-weight: 600; color: #1f1f2e; margin-bottom: 12px; }
+    .card { border: 1px solid #e9ebed; border-radius: 8px; padding: 32px; display: flex; align-items: center; justify-content: center; gap: 24px; margin-bottom: 24px; }
+    .card-illo { width: 72px; height: 56px; background: #f3f4f6; border-radius: 6px; flex-shrink: 0; }
+    .card-text h3 { font-size: 14px; font-weight: 600; color: #2f3941; margin-bottom: 4px; }
+    .card-text p  { font-size: 13px; color: #68737d; margin-bottom: 4px; }
+    .card-text a  { font-size: 13px; color: #1f73b7; text-decoration: none; }
   </style>
 </head>
 <body>
 
-<div class="browser">
+<div data-garden-id="navigation.product">
 
-  <!-- Browser chrome -->
-  <div class="browser-bar">
-    <div class="traffic-lights">
-      <span class="tl-red"></span>
-      <span class="tl-yellow"></span>
-      <span class="tl-green"></span>
-    </div>
-    <div class="address-bar">
-      <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
-        <path stroke="#999" stroke-width="1.5" d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 0v14M1 8h14M2.5 3.5C4 6 6 8 8 8s4-2 5.5-4.5M2.5 12.5C4 10 6 8 8 8s4 2 5.5 4.5"/>
+  <!-- Header -->
+  <header data-garden-id="navigation.header">
+    <div class="header-brand">
+      <!-- Zendesk wordmark Z -->
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <rect width="24" height="24" rx="3" fill="#1f1f2e"/>
+        <path d="M5 7.5h9.5L5 15.5V17h14v-2.5H9.5L19 6.5V5H5v2.5z" fill="#fff"/>
       </svg>
-      cameraobscura.zendesk.com/admin/home
     </div>
-  </div>
+    <div class="header-product-name">
+      Admin center
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 10L3 5h10z"/></svg>
+    </div>
+    <div class="header-sep"></div>
+    <span class="header-account">cameraobscura</span>
+    <div class="header-search">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <circle cx="7" cy="7" r="4.5" stroke="#68737d" stroke-width="1.5"/>
+        <path d="M10.5 10.5L13 13" stroke="#68737d" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      Search admin center
+    </div>
+    <div class="header-actions">
+      <button class="header-icon-btn" aria-label="AI">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M2.499 11a.5.5 0 0 1 .477.348l.256.797a1.01 1.01 0 0 0 .63.633l.789.248a.5.5 0 0 1 .001.954l-.79.252a1.007 1.007 0 0 0-.63.633l-.252.787a.5.5 0 0 1-.95.008l-.266-.79a1.034 1.034 0 0 0-.636-.639l-.781-.252a.5.5 0 0 1-.002-.95l.794-.26a1.023 1.023 0 0 0 .636-.634l.248-.786A.5.5 0 0 1 2.5 11ZM1 7.513a1 1 0 0 1 .69-.953l2.583-.844a3.95 3.95 0 0 0 2.465-2.457l.808-2.56A1 1 0 0 1 9.452.695l.832 2.598a3.906 3.906 0 0 0 2.448 2.453l2.569.811a1 1 0 0 1 .004 1.906l-2.572.823a3.896 3.896 0 0 0-2.449 2.454l-.82 2.565a1 1 0 0 1-1.9.014l-.866-2.567v-.002A3.971 3.971 0 0 0 4.24 9.284l-2.547-.821A1 1 0 0 1 1 7.513Z"/>
+        </svg>
+      </button>
+      <button class="header-icon-btn" aria-label="Notifications">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 0a6 6 0 0 1 6 6c0 2.348-.87 4.217-2.262 5.996L10.5 13H14v2H2v-2h3.5l-1.238-1.004C2.87 10.217 2 8.348 2 6a6 6 0 0 1 6-6zm0 14.5a1.5 1.5 0 0 0 1.5-1.5h-3a1.5 1.5 0 0 0 1.5 1.5z"/>
+        </svg>
+      </button>
+      <div class="header-avatar">J</div>
+    </div>
+  </header>
 
-  <!-- Zendesk chrome -->
-  <div class="zd-chrome">
+  <!-- Nav rail -->
+  <nav data-garden-id="navigation.nav" aria-label="Main">
+    <ul data-garden-id="navigation.nav-list">
 
-    <!-- Top bar -->
-    <div class="top-bar">
-      <div class="zd-logo">
-        <!-- Zendesk Z logo -->
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <rect width="24" height="24" rx="4" fill="#1f1f2e"/>
-          <path d="M6 7h8.5L6 15.5V17h12v-2H9.5L18 6.5V5H6v2z" fill="#fff"/>
-        </svg>
-      </div>
-      <div class="product-name">
-        Admin center
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="color:#68737d">
-          <path d="M8 10L3 5h10l-5 5z"/>
-        </svg>
-      </div>
-      <span class="account-name">cameraobscura</span>
-      <div class="top-bar-search">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-          <circle cx="7" cy="7" r="5" stroke="#68737d" stroke-width="1.5"/>
-          <path d="M11 11l3 3" stroke="#68737d" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        Search admin center
-      </div>
-      <div class="top-bar-actions">
-        <div class="top-bar-icon">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M2.499 11a.5.5 0 0 1 .477.348l.256.797a1.01 1.01 0 0 0 .63.633l.789.248a.5.5 0 0 1 .001.954l-.79.252a1.007 1.007 0 0 0-.63.633l-.252.787a.5.5 0 0 1-.95.008l-.266-.79a1.034 1.034 0 0 0-.636-.639l-.781-.252a.5.5 0 0 1-.002-.95l.794-.26a1.023 1.023 0 0 0 .636-.634l.248-.786A.5.5 0 0 1 2.5 11ZM1 7.513a1 1 0 0 1 .69-.953l2.583-.844a3.95 3.95 0 0 0 2.465-2.457l.808-2.56A1 1 0 0 1 9.452.695l.832 2.598a3.906 3.906 0 0 0 2.448 2.453l2.569.811a1 1 0 0 1 .004 1.906l-2.572.823a3.896 3.896 0 0 0-2.449 2.454l-.82 2.565a1 1 0 0 1-1.9.014l-.866-2.567v-.002A3.971 3.971 0 0 0 4.24 9.284l-2.547-.821A1 1 0 0 1 1 7.513Z"/>
-          </svg>
-        </div>
-        <div class="top-bar-icon">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M8 0a6 6 0 0 1 6 6c0 2.348-.87 4.217-2.262 5.996L10.5 13H14v2H2v-2h3.5l-1.238-1.004C2.87 10.217 2 8.348 2 6a6 6 0 0 1 6-6zm0 14.5a1.5 1.5 0 0 0 1.5-1.5h-3a1.5 1.5 0 0 0 1.5 1.5z"/>
-          </svg>
-        </div>
-        <div class="top-bar-avatar">J</div>
+      <!-- Home — active -->
+      <li data-garden-id="navigation.nav-item">
+        <button data-garden-id="navigation.nav-button" aria-current="true" aria-label="Home" type="button" data-parallax>
+          <span data-garden-id="navigation.nav-button-content">
+            <div class="stage">
+              <div class="layer" data-depth="shadow">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M11.416 2.88a2.5 2.5 0 0 0-2.832 0l-5 3.437A2.5 2.5 0 0 0 2.5 8.377V15A2.5 2.5 0 0 0 5 17.5h2.083c.46 0 .834-.373.834-.833V13.75a2.083 2.083 0 0 1 4.166 0v2.917c0 .46.373.833.834.833H15a2.5 2.5 0 0 0 2.5-2.5V8.377a2.5 2.5 0 0 0-1.084-2.06l-5-3.438Z"/>
+                </svg>
+              </div>
+              <!-- door/base -->
+              <div class="layer" data-role="fill">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M11.416 2.88a2.5 2.5 0 0 0-2.832 0l-5 3.437A2.5 2.5 0 0 0 2.5 8.377V15A2.5 2.5 0 0 0 5 17.5h2.083c.46 0 .834-.373.834-.833V13.75a2.083 2.083 0 0 1 4.166 0v2.917c0 .46.373.833.834.833H15a2.5 2.5 0 0 0 2.5-2.5V8.377a2.5 2.5 0 0 0-1.084-2.06l-5-3.438Z"/>
+                </svg>
+              </div>
+              <!-- roof outline -->
+              <div class="layer" data-role="stroke">
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
+                  <path stroke="currentColor" stroke-width="1.2" d="M2.5 9.5L10 3.5l7.5 6M5 17.5V10h10v7.5"/>
+                </svg>
+              </div>
+            </div>
+          </span>
+        </button>
+      </li>
+
+      <!-- Views (inbox tray icon) -->
+      <li data-garden-id="navigation.nav-item">
+        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="Views" type="button" data-parallax>
+          <span data-garden-id="navigation.nav-button-content">
+            <div class="stage">
+              <div class="layer" data-depth="shadow">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M5 2.5h10A2.5 2.5 0 0 1 17.5 5v5h-4.272a.833.833 0 0 0-.807.626 2.501 2.501 0 0 1-4.842 0A.833.833 0 0 0 6.772 10H2.5V5A2.5 2.5 0 0 1 5 2.5Z M17.5 11.667V15a2.5 2.5 0 0 1-2.5 2.5H5A2.5 2.5 0 0 1 2.5 15v-3.333h3.68a4.167 4.167 0 0 0 7.64 0h3.68Z"/>
+                </svg>
+              </div>
+              <!-- tray body -->
+              <div class="layer" data-depth="back">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M17.5 11.667V15a2.5 2.5 0 0 1-2.5 2.5H5A2.5 2.5 0 0 1 2.5 15v-3.333h3.68a4.167 4.167 0 0 0 7.64 0h3.68Z"/>
+                </svg>
+              </div>
+              <!-- tray top -->
+              <div class="layer" data-depth="front">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M5 2.5h10A2.5 2.5 0 0 1 17.5 5v5h-4.272a.833.833 0 0 0-.807.626 2.501 2.501 0 0 1-4.842 0A.833.833 0 0 0 6.772 10H2.5V5A2.5 2.5 0 0 1 5 2.5Z"/>
+                </svg>
+              </div>
+            </div>
+          </span>
+        </button>
+      </li>
+
+      <!-- Customer lists (two people) -->
+      <li data-garden-id="navigation.nav-item">
+        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="Customer lists" type="button" data-parallax>
+          <span data-garden-id="navigation.nav-button-content">
+            <div class="stage">
+              <div class="layer" data-depth="shadow">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M2.916 5.833a3.333 3.333 0 1 1 6.666 0 3.333 3.333 0 0 1-6.666 0Zm7.5 0a3.333 3.333 0 1 1 6.666 0 3.333 3.333 0 0 1-6.666 0ZM6.249 10c2.392 0 4.662 1.65 5.506 4.678.442 1.583-.908 2.822-2.294 2.822H3.037c-1.386 0-2.736-1.24-2.294-2.822C1.587 11.65 3.857 10 6.249 10Zm7.112 4.23c-.406-1.457-1.105-2.69-2.004-3.645A5.189 5.189 0 0 1 13.75 10c2.392 0 4.661 1.65 5.506 4.678.441 1.583-.909 2.822-2.295 2.822h-4.186c.64-.87.932-2.03.586-3.27Z"/>
+                </svg>
+              </div>
+              <!-- back person -->
+              <div class="layer" data-depth="back">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M10.416 5.833a3.333 3.333 0 1 1 6.666 0 3.333 3.333 0 0 1-6.666 0Zm3.945 4.397c-.406-1.457-1.105-2.69-2.004-3.645A5.189 5.189 0 0 1 13.75 10c2.392 0 4.661 1.65 5.506 4.678.441 1.583-.909 2.822-2.295 2.822h-4.186c.64-.87.932-2.03.586-3.27Z"/>
+                </svg>
+              </div>
+              <!-- front person -->
+              <div class="layer" data-depth="front">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M2.916 5.833a3.333 3.333 0 1 1 6.666 0 3.333 3.333 0 0 1-6.666 0ZM6.249 10c2.392 0 4.662 1.65 5.506 4.678.442 1.583-.908 2.822-2.294 2.822H3.037c-1.386 0-2.736-1.24-2.294-2.822C1.587 11.65 3.857 10 6.249 10Z"/>
+                </svg>
+              </div>
+            </div>
+          </span>
+        </button>
+      </li>
+
+      <!-- Organizations (building) -->
+      <li data-garden-id="navigation.nav-item">
+        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="Organizations" type="button" data-parallax>
+          <span data-garden-id="navigation.nav-button-content">
+            <div class="stage">
+              <div class="layer" data-depth="shadow">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M16.667 15.833V5a2.5 2.5 0 0 0-2.5-2.5H5.833a2.5 2.5 0 0 0-2.5 2.5v10.833H2.5a.833.833 0 0 0 0 1.667h15a.833.833 0 1 0 0-1.667h-.833Zm-9.167-10h.833a.833.833 0 1 1 0 1.667H7.5a.833.833 0 0 1 0-1.667Zm4.167 0h.833a.833.833 0 1 1 0 1.667h-.833a.833.833 0 1 1 0-1.667ZM7.5 9.167h.833a.833.833 0 1 1 0 1.666H7.5a.833.833 0 0 1 0-1.666Zm4.167 0h.833a.833.833 0 1 1 0 1.666h-.833a.833.833 0 1 1 0-1.666ZM7.5 12.5h.833a.833.833 0 1 1 0 1.667H7.5a.833.833 0 0 1 0-1.667Zm4.167 0h.833a.833.833 0 1 1 0 1.667h-.833a.833.833 0 1 1 0-1.667Z"/>
+                </svg>
+              </div>
+              <!-- windows -->
+              <div class="layer" data-depth="back">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M7.5 5.833h.833a.833.833 0 1 1 0 1.667H7.5a.833.833 0 0 1 0-1.667Zm4.167 0h.833a.833.833 0 1 1 0 1.667h-.833a.833.833 0 1 1 0-1.667ZM7.5 9.167h.833a.833.833 0 1 1 0 1.666H7.5a.833.833 0 0 1 0-1.666Zm4.167 0h.833a.833.833 0 1 1 0 1.666h-.833a.833.833 0 1 1 0-1.666ZM7.5 12.5h.833a.833.833 0 1 1 0 1.667H7.5a.833.833 0 0 1 0-1.667Zm4.167 0h.833a.833.833 0 1 1 0 1.667h-.833a.833.833 0 1 1 0-1.667Z"/>
+                </svg>
+              </div>
+              <!-- building shell -->
+              <div class="layer" data-depth="front">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M16.667 15.833V5a2.5 2.5 0 0 0-2.5-2.5H5.833a2.5 2.5 0 0 0-2.5 2.5v10.833H2.5a.833.833 0 0 0 0 1.667h15a.833.833 0 1 0 0-1.667h-.833Z" fill-rule="evenodd" clip-rule="evenodd"/>
+                </svg>
+              </div>
+            </div>
+          </span>
+        </button>
+      </li>
+
+      <!-- Custom objects (shapes) -->
+      <li data-garden-id="navigation.nav-item">
+        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="Custom objects" type="button" data-parallax>
+          <span data-garden-id="navigation.nav-button-content">
+            <div class="stage">
+              <div class="layer" data-depth="shadow">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M6.155 7.401a.882.882 0 0 0 .764 1.324h6.113a.882.882 0 0 0 .764-1.324L10.74 2.108a.882.882 0 0 0-1.528 0L6.155 7.4Zm8.232 3.088a3.529 3.529 0 1 0 0 7.058 3.529 3.529 0 0 0 0-7.058ZM2.918 12.474c0-.974.79-1.764 1.764-1.764H7.77c.975 0 1.764.79 1.764 1.764v3.088c0 .974-.79 1.764-1.764 1.764H4.682c-.974 0-1.764-.79-1.764-1.764v-3.088Z"/>
+                </svg>
+              </div>
+              <!-- circle -->
+              <div class="layer" data-depth="back">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M14.387 10.49a3.529 3.529 0 1 0 0 7.058 3.529 3.529 0 0 0 0-7.058Z"/>
+                </svg>
+              </div>
+              <!-- square -->
+              <div class="layer" data-depth="mid">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M2.918 12.474c0-.974.79-1.764 1.764-1.764H7.77c.975 0 1.764.79 1.764 1.764v3.088c0 .974-.79 1.764-1.764 1.764H4.682c-.974 0-1.764-.79-1.764-1.764v-3.088Z"/>
+                </svg>
+              </div>
+              <!-- triangle -->
+              <div class="layer" data-depth="front">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M6.155 7.401a.882.882 0 0 0 .764 1.324h6.113a.882.882 0 0 0 .764-1.324L10.74 2.108a.882.882 0 0 0-1.528 0L6.155 7.4Z"/>
+                </svg>
+              </div>
+            </div>
+          </span>
+        </button>
+      </li>
+
+      <!-- Reporting (EKG/pulse) -->
+      <li data-garden-id="navigation.nav-item">
+        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="Reporting" type="button" data-parallax>
+          <span data-garden-id="navigation.nav-button-content">
+            <div class="stage">
+              <div class="layer" data-depth="shadow">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M5 2.5A2.5 2.5 0 0 0 2.5 5v4.167h3.652c.63 0 1.208.356 1.49.921l.691 1.382 2.588-5.176a.833.833 0 0 1 1.491 0l1.436 2.873H17.5V5A2.5 2.5 0 0 0 15 2.5H5Z M2.5 15A2.5 2.5 0 0 0 5 17.5h10a2.5 2.5 0 0 0 2.5-2.5v-4.166h-3.652a1.666 1.666 0 0 1-1.49-.922l-.691-1.382-2.588 5.176a.833.833 0 0 1-1.491 0l-1.436-2.872H2.5V15Z"/>
+                </svg>
+              </div>
+              <!-- bottom half -->
+              <div class="layer" data-depth="back">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M2.5 15A2.5 2.5 0 0 0 5 17.5h10a2.5 2.5 0 0 0 2.5-2.5v-4.166h-3.652a1.666 1.666 0 0 1-1.49-.922l-.691-1.382-2.588 5.176a.833.833 0 0 1-1.491 0l-1.436-2.872H2.5V15Z"/>
+                </svg>
+              </div>
+              <!-- top half with pulse -->
+              <div class="layer" data-depth="front">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M5 2.5A2.5 2.5 0 0 0 2.5 5v4.167h3.652c.63 0 1.208.356 1.49.921l.691 1.382 2.588-5.176a.833.833 0 0 1 1.491 0l1.436 2.873H17.5V5A2.5 2.5 0 0 0 15 2.5H5Z"/>
+                </svg>
+              </div>
+            </div>
+          </span>
+        </button>
+      </li>
+
+      <li aria-hidden="true" data-garden-id="navigation.nav-item" style="width:100%; display:flex; justify-content:center;">
+        <hr data-garden-id="navigation.nav-separator"/>
+      </li>
+
+      <!-- Settings (gear) — pushed to bottom -->
+      <li data-garden-id="navigation.nav-item" style="margin-top:auto;">
+        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="Settings" type="button" data-parallax>
+          <span data-garden-id="navigation.nav-button-content">
+            <div class="stage">
+              <div class="layer" data-depth="shadow">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M8.154 2.654a2.218 2.218 0 0 1 3.692 0l.463.696c.188.281.53.417.86.34l.571-.131a2.252 2.252 0 0 1 2.701 2.7l-.132.573c-.076.33.06.671.341.859l.696.463a2.218 2.218 0 0 1 0 3.692l-.696.463a.813.813 0 0 0-.34.86l.131.571a2.252 2.252 0 0 1-2.7 2.701l-.573-.132a.813.813 0 0 0-.859.341l-.463.696a2.218 2.218 0 0 1-3.692 0l-.463-.696a.813.813 0 0 0-.86-.34l-.571.131a2.252 2.252 0 0 1-2.701-2.7l.132-.573a.813.813 0 0 0-.341-.859l-.696-.463a2.218 2.218 0 0 1 0-3.692l.696-.463a.813.813 0 0 0 .34-.86l-.13-.571a2.252 2.252 0 0 1 2.7-2.701l.573.132c.33.076.671-.06.859-.341l.463-.696ZM7.084 10a2.917 2.917 0 1 0 5.833 0 2.917 2.917 0 0 0-5.834 0Z"/>
+                </svg>
+              </div>
+              <!-- inner circle -->
+              <div class="layer" data-depth="back">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M7.084 10a2.917 2.917 0 1 0 5.833 0 2.917 2.917 0 0 0-5.834 0Z"/>
+                </svg>
+              </div>
+              <!-- outer cog ring -->
+              <div class="layer" data-depth="front">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M8.154 2.654a2.218 2.218 0 0 1 3.692 0l.463.696c.188.281.53.417.86.34l.571-.131a2.252 2.252 0 0 1 2.701 2.7l-.132.573c-.076.33.06.671.341.859l.696.463a2.218 2.218 0 0 1 0 3.692l-.696.463a.813.813 0 0 0-.34.86l.131.571a2.252 2.252 0 0 1-2.7 2.701l-.573-.132a.813.813 0 0 0-.859.341l-.463.696a2.218 2.218 0 0 1-3.692 0l-.463-.696a.813.813 0 0 0-.86-.34l-.571.131a2.252 2.252 0 0 1-2.701-2.7l.132-.573a.813.813 0 0 0-.341-.859l-.696-.463a2.218 2.218 0 0 1 0-3.692l.696-.463a.813.813 0 0 0 .34-.86l-.13-.571a2.252 2.252 0 0 1 2.7-2.701l.573.132c.33.076.671-.06.859-.341l.463-.696Z"/>
+                </svg>
+              </div>
+            </div>
+          </span>
+        </button>
+      </li>
+
+    </ul>
+  </nav>
+
+  <!-- Main content -->
+  <main data-garden-id="navigation.main">
+    <h1 class="content-heading">Hello</h1>
+    <p class="content-sub">
+      Get help from admin copilot
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M2.499 11a.5.5 0 0 1 .477.348l.256.797a1.01 1.01 0 0 0 .63.633l.789.248a.5.5 0 0 1 .001.954l-.79.252a1.007 1.007 0 0 0-.63.633l-.252.787a.5.5 0 0 1-.95.008l-.266-.79a1.034 1.034 0 0 0-.636-.639l-.781-.252a.5.5 0 0 1-.002-.95l.794-.26a1.023 1.023 0 0 0 .636-.634l.248-.786A.5.5 0 0 1 2.5 11ZM1 7.513a1 1 0 0 1 .69-.953l2.583-.844a3.95 3.95 0 0 0 2.465-2.457l.808-2.56A1 1 0 0 1 9.452.695l.832 2.598a3.906 3.906 0 0 0 2.448 2.453l2.569.811a1 1 0 0 1 .004 1.906l-2.572.823a3.896 3.896 0 0 0-2.449 2.454l-.82 2.565a1 1 0 0 1-1.9.014l-.866-2.567v-.002A3.971 3.971 0 0 0 4.24 9.284l-2.547-.821A1 1 0 0 1 1 7.513Z"/>
+      </svg>
+    </p>
+    <div class="chips">
+      <div class="chip">What are recommendations?</div>
+      <div class="chip">What should I focus on?</div>
+      <div class="chip">What is auto assist?</div>
+      <div class="chip"><strong>Show more</strong></div>
+    </div>
+    <p class="section-title">Latest insights</p>
+    <div class="card">
+      <div class="card-illo"></div>
+      <div class="card-text">
+        <h3>Not enough data to generate insights</h3>
+        <p>Check back soon to learn about your account.</p>
+        <a href="#">Learn about latest insights ↗</a>
       </div>
     </div>
-
-    <!-- Body -->
-    <div class="body">
-
-      <!-- Nav rail -->
-      <nav class="nav-rail">
-
-        <!-- Zendesk logo -->
-        <div class="nav-logo">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-            <path d="M6 7h8.5L6 15.5V17h12v-2H9.5L18 6.5V5H6v2z"/>
-          </svg>
-        </div>
-
-        <!-- 1. Home — active -->
-        <button class="nav-item active" aria-label="Home" data-parallax>
-          <div class="stage">
-            <div class="layer" data-depth="shadow">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M13 16h-2.5a.5.5 0 01-.5-.5v-5a.501.501 0 00-.5-.5h-3a.5.5 0 00-.5.5v5a.5.5 0 01-.5.5H3a1 1 0 01-1-1V9h-.953a1.042 1.042 0 01-.972-.63.957.957 0 01.213-1.058L7.293.3a1.002 1.002 0 011.414 0l7.004 7.01a.958.958 0 01.214 1.06 1.042 1.042 0 01-.972.63H14v6a1 1 0 01-1 1z"/>
-              </svg>
-            </div>
-            <div class="layer" data-role="fill">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M13 16h-2.5a.5.5 0 01-.5-.5v-5a.501.501 0 00-.5-.5h-3a.5.5 0 00-.5.5v5a.5.5 0 01-.5.5H3a1 1 0 01-1-1V9h-.953a1.042 1.042 0 01-.972-.63.957.957 0 01.213-1.058L7.293.3a1.002 1.002 0 011.414 0l7.004 7.01a.958.958 0 01.214 1.06 1.042 1.042 0 01-.972.63H14v6a1 1 0 01-1 1z"/>
-              </svg>
-            </div>
-            <div class="layer" data-role="stroke">
-              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path stroke="currentColor" stroke-width="1.1" d="M2 9H1.047a.042.042 0 01-.034-.015.04.04 0 01-.007-.036L8 2 15 9h-.953a1 1 0 00-1 1v5a1 1 0 01-1 1h-2.5v-5a.5.5 0 00-.5-.5h-3a.5.5 0 00-.5.5v5H3a1 1 0 01-1-1V9z"/>
-              </svg>
-            </div>
-          </div>
-        </button>
-
-        <!-- 2. Account / Building -->
-        <button class="nav-item" aria-label="Account" data-parallax>
-          <div class="stage">
-            <div class="layer" data-depth="shadow">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M13 0H3c-.55 0-1 .45-1 1v14c0 .55.45 1 1 1h2.5c.28 0 .5-.22.5-.5v-4c0-.28.22-.5.5-.5h3c.28 0 .5.22.5.5v4c0 .28.22.5.5.5H13c.55 0 1-.45 1-1V1c0-.55-.45-1-1-1zM7 9H5V7h2v2zm0-4H5V3h2v2zm4 4H9V7h2v2zm0-4H9V3h2v2z"/>
-              </svg>
-            </div>
-            <div class="layer" data-depth="back">
-              <!-- windows grid -->
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M7 9H5V7h2v2zm0-4H5V3h2v2zm4 4H9V7h2v2zm0-4H9V3h2v2z"/>
-              </svg>
-            </div>
-            <div class="layer" data-depth="front">
-              <!-- building outline -->
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M13 0H3c-.55 0-1 .45-1 1v14c0 .55.45 1 1 1h2.5c.28 0 .5-.22.5-.5v-4h3v4c0 .28.22.5.5.5H13c.55 0 1-.45 1-1V1c0-.55-.45-1-1-1z" fill-rule="evenodd" clip-rule="evenodd"/>
-              </svg>
-            </div>
-          </div>
-        </button>
-
-        <!-- 3. People / Group -->
-        <button class="nav-item" aria-label="People" data-parallax>
-          <div class="stage">
-            <div class="layer" data-depth="shadow">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <circle cx="11" cy="6" r="3"/>
-                <circle cx="4.5" cy="3.5" r="2.5"/>
-                <path d="M15.45 15H6.53c-.14 0-.28-.06-.37-.17s-.14-.25-.12-.39C6.3 11.91 8.44 10 10.99 10c2.55 0 4.68 1.91 4.96 4.45.02.14-.03.28-.12.39s-.24.16-.38.16zm-8.12-5H1.67c-.16 0-.31-.08-.41-.21a.53.53 0 01-.06-.46A3.508 3.508 0 014.5 7c1.48 0 2.81.94 3.3 2.34.05.15.03.32-.06.46-.09.12-.25.2-.41.2z"/>
-              </svg>
-            </div>
-            <!-- back person -->
-            <div class="layer" data-depth="back">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <circle cx="11" cy="6" r="3"/>
-                <path d="M15.45 15H6.53c-.14 0-.28-.06-.37-.17s-.14-.25-.12-.39C6.3 11.91 8.44 10 10.99 10c2.55 0 4.68 1.91 4.96 4.45.02.14-.03.28-.12.39s-.24.16-.38.16z"/>
-              </svg>
-            </div>
-            <!-- front person body -->
-            <div class="layer" data-depth="mid">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M7.33 10H1.67c-.16 0-.31-.08-.41-.21a.53.53 0 01-.06-.46A3.508 3.508 0 014.5 7c1.48 0 2.81.94 3.3 2.34.05.15.03.32-.06.46-.09.12-.25.2-.41.2z"/>
-              </svg>
-            </div>
-            <!-- front person head -->
-            <div class="layer" data-depth="front">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <circle cx="4.5" cy="3.5" r="2.5"/>
-              </svg>
-            </div>
-          </div>
-        </button>
-
-        <!-- 4. Channels / Megaphone -->
-        <button class="nav-item" aria-label="Channels" data-parallax>
-          <div class="stage">
-            <div class="layer" data-depth="shadow">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M5 4.002h5.586L14.293.295C14.923-.335 16 .11 16 1.002v14c0 .89-1.077 1.337-1.707.707l-3.707-3.707H8v2a2 2 0 11-4 0v-2a4 4 0 010-8h1z"/>
-              </svg>
-            </div>
-            <!-- bell/body -->
-            <div class="layer" data-depth="back">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M5 4.002h5.586L14.293.295C14.923-.335 16 .11 16 1.002v14c0 .89-1.077 1.337-1.707.707l-3.707-3.707H8v2a2 2 0 11-4 0v-2a4 4 0 010-8h1z"/>
-              </svg>
-            </div>
-            <!-- mouth piece -->
-            <div class="layer" data-depth="front">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M10.586 4.002H5v8h3l3.707 3.707.707-.707-3.707-3.707-.293-.293H8v-2H5v-4h5.586z" opacity="0"/>
-                <!-- using whole path but slightly scaled up for depth pop -->
-                <path d="M14.293.295L10.586 4H5v8h3l3.707 3.707C12.923 16.337 14 15.89 14 15.002v-14c0-.89-1.077-1.337-1.707-.707z"/>
-              </svg>
-            </div>
-          </div>
-        </button>
-
-        <!-- 5. AI / Sparkle -->
-        <button class="nav-item" aria-label="AI" data-parallax>
-          <div class="stage">
-            <div class="layer" data-depth="shadow">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M2.499 11a.5.5 0 0 1 .477.348l.256.797a1.01 1.01 0 0 0 .63.633l.789.248a.5.5 0 0 1 .001.954l-.79.252a1.007 1.007 0 0 0-.63.633l-.252.787a.5.5 0 0 1-.95.008l-.266-.79a1.034 1.034 0 0 0-.636-.639l-.781-.252a.5.5 0 0 1-.002-.95l.794-.26a1.023 1.023 0 0 0 .636-.634l.248-.786A.5.5 0 0 1 2.5 11ZM1 7.513a1 1 0 0 1 .69-.953l2.583-.844a3.95 3.95 0 0 0 2.465-2.457l.808-2.56A1 1 0 0 1 9.452.695l.832 2.598a3.906 3.906 0 0 0 2.448 2.453l2.569.811a1 1 0 0 1 .004 1.906l-2.572.823a3.896 3.896 0 0 0-2.449 2.454l-.82 2.565a1 1 0 0 1-1.9.014l-.866-2.567v-.002A3.971 3.971 0 0 0 4.24 9.284l-2.547-.821A1 1 0 0 1 1 7.513Z"/>
-              </svg>
-            </div>
-            <!-- large sparkle — back -->
-            <div class="layer" data-depth="back">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M1 7.513a1 1 0 0 1 .69-.953l2.583-.844a3.95 3.95 0 0 0 2.465-2.457l.808-2.56A1 1 0 0 1 9.452.695l.832 2.598a3.906 3.906 0 0 0 2.448 2.453l2.569.811a1 1 0 0 1 .004 1.906l-2.572.823a3.896 3.896 0 0 0-2.449 2.454l-.82 2.565a1 1 0 0 1-1.9.014l-.866-2.567v-.002A3.971 3.971 0 0 0 4.24 9.284l-2.547-.821A1 1 0 0 1 1 7.513Z"/>
-              </svg>
-            </div>
-            <!-- small sparkle — front -->
-            <div class="layer" data-depth="front">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M2.499 11a.5.5 0 0 1 .477.348l.256.797a1.01 1.01 0 0 0 .63.633l.789.248a.5.5 0 0 1 .001.954l-.79.252a1.007 1.007 0 0 0-.63.633l-.252.787a.5.5 0 0 1-.95.008l-.266-.79a1.034 1.034 0 0 0-.636-.639l-.781-.252a.5.5 0 0 1-.002-.95l.794-.26a1.023 1.023 0 0 0 .636-.634l.248-.786A.5.5 0 0 1 2.5 11Z"/>
-              </svg>
-            </div>
-          </div>
-        </button>
-
-        <!-- 6. Workspaces / Monitor -->
-        <button class="nav-item" aria-label="Workspaces" data-parallax>
-          <div class="stage">
-            <div class="layer" data-depth="shadow">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <rect width="16" height="11" rx="1" ry="1"/>
-                <path d="M11.5 16h-7l-.4-.2a.5.5 0 01-.1-.4 4 4 0 017.9 0 .5.5 0 01-.1.4z"/>
-              </svg>
-            </div>
-            <!-- stand/base -->
-            <div class="layer" data-depth="back">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M11.5 16h-7l-.4-.2a.5.5 0 01-.1-.4 4 4 0 017.9 0 .5.5 0 01-.1.4z"/>
-              </svg>
-            </div>
-            <!-- screen -->
-            <div class="layer" data-depth="front">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <rect width="16" height="11" rx="1" ry="1"/>
-              </svg>
-            </div>
-          </div>
-        </button>
-
-        <!-- 7. Objects & Rules / Flow arrows -->
-        <button class="nav-item" aria-label="Objects &amp; Rules" data-parallax>
-          <div class="stage">
-            <div class="layer" data-depth="shadow">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M3 2h.02c.023 0 .046.002.07.004L3 2a1.008 1.008 0 01.595.196c.04.03.077.061.112.097l-.09-.08.008.007.082.073 2 2C6.337 4.923 5.891 6 5 6H4v5a1 1 0 00.883.993L5 12h3a1 1 0 01.117 1.993L8 14H5a3 3 0 01-2.995-2.824L2 11V6H1C.148 6-.297 5.014.217 4.377l.076-.084 2-2 .082-.073A1.005 1.005 0 013 2zm8 0a3 3 0 012.995 2.824L14 5v5h1c.852 0 1.297.986.783 1.623l-.076.084-2 2A1.006 1.006 0 0113 14h-.032l-.054-.004L13 14a1.008 1.008 0 01-.595-.196.999.999 0 01-.112-.097l.09.08a1.006 1.006 0 01-.09-.08l-2-2C9.663 11.077 10.109 10 11 10l1-.001V5a1 1 0 00-.883-.993L11 4H8a1 1 0 01-.117-1.993L8 2h3z"/>
-              </svg>
-            </div>
-            <!-- left arrow -->
-            <div class="layer" data-depth="back">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M3 2a1.008 1.008 0 01.595.196c.04.03.077.061.112.097l-.09-.08.008.007.082.073 2 2C6.337 4.923 5.891 6 5 6H4v5a1 1 0 00.883.993L5 12h3a1 1 0 01.117 1.993L8 14H5a3 3 0 01-2.995-2.824L2 11V6H1C.148 6-.297 5.014.217 4.377l.076-.084 2-2 .082-.073A1.005 1.005 0 013 2z"/>
-              </svg>
-            </div>
-            <!-- right arrow -->
-            <div class="layer" data-depth="front">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M11 2a3 3 0 012.995 2.824L14 5v5h1c.852 0 1.297.986.783 1.623l-.076.084-2 2A1.006 1.006 0 0113 14h-.032l-.054-.004L13 14a1.008 1.008 0 01-.595-.196.999.999 0 01-.112-.097l.09.08a1.006 1.006 0 01-.09-.08l-2-2C9.663 11.077 10.109 10 11 10l1-.001V5a1 1 0 00-.883-.993L11 4H8a1 1 0 01-.117-1.993L8 2h3z"/>
-              </svg>
-            </div>
-          </div>
-        </button>
-
-        <!-- 8. Apps & Integrations / Grid -->
-        <button class="nav-item" aria-label="Apps &amp; Integrations" data-parallax>
-          <div class="stage">
-            <div class="layer" data-depth="shadow">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <rect x="0" y="0" width="7" height="7" rx="1"/>
-                <rect x="0" y="9" width="7" height="7" rx="1"/>
-                <rect x="9" y="0" width="7" height="7" rx="1"/>
-                <rect x="9" y="9" width="7" height="7" rx="1"/>
-              </svg>
-            </div>
-            <!-- back two squares -->
-            <div class="layer" data-depth="back">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <rect x="0" y="0" width="7" height="7" rx="1"/>
-                <rect x="9" y="9" width="7" height="7" rx="1"/>
-              </svg>
-            </div>
-            <!-- front two squares -->
-            <div class="layer" data-depth="front">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <rect x="9" y="0" width="7" height="7" rx="1"/>
-                <rect x="0" y="9" width="7" height="7" rx="1"/>
-              </svg>
-            </div>
-          </div>
-        </button>
-
-        <div class="nav-spacer"></div>
-        <div class="nav-divider"></div>
-
-        <!-- 9. Success Hub / Rocket -->
-        <button class="nav-item" aria-label="Success Hub" data-parallax>
-          <div class="stage">
-            <div class="layer" data-depth="shadow">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="m10.42 10.319-2.404 2.044v1.42l2.015-1.21a.802.802 0 0 0 .39-.687V10.32Zm-4.007 2.005L3.676 9.587H2.217A1.603 1.603 0 0 1 .843 7.16l1.209-2.015a2.405 2.405 0 0 1 2.062-1.168h2.952C9.089 1.836 11.383.264 14.36.006a1.507 1.507 0 0 1 1.634 1.634c-.258 2.977-1.83 5.27-3.97 7.294v2.952c0 .845-.444 1.628-1.168 2.062l-2.015 1.21a1.603 1.603 0 0 1-2.428-1.375v-1.459ZM5.68 5.58H4.114a.802.802 0 0 0-.687.389l-1.21 2.015h1.42L5.681 5.58ZM0 13.595A2.405 2.405 0 1 1 2.405 16H.802A.802.802 0 0 1 0 15.198v-1.603Z"/>
-              </svg>
-            </div>
-            <!-- body -->
-            <div class="layer" data-depth="back">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="M6.413 12.324L3.676 9.587H2.217A1.603 1.603 0 0 1 .843 7.16l1.209-2.015a2.405 2.405 0 0 1 2.062-1.168h2.952C9.089 1.836 11.383.264 14.36.006a1.507 1.507 0 0 1 1.634 1.634c-.258 2.977-1.83 5.27-3.97 7.294v2.952c0 .845-.444 1.628-1.168 2.062l-2.015 1.21a1.603 1.603 0 0 1-2.428-1.375v-1.459Z"/>
-              </svg>
-            </div>
-            <!-- booster nozzle + nose -->
-            <div class="layer" data-depth="front">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                <path d="m10.42 10.319-2.404 2.044v1.42l2.015-1.21a.802.802 0 0 0 .39-.687V10.32ZM5.68 5.58H4.114a.802.802 0 0 0-.687.389l-1.21 2.015h1.42L5.681 5.58ZM0 13.595A2.405 2.405 0 1 1 2.405 16H.802A.802.802 0 0 1 0 15.198v-1.603Z"/>
-              </svg>
-            </div>
-          </div>
-        </button>
-
-      </nav>
-
-      <!-- Content area -->
-      <div class="content">
-        <h2>Hello</h2>
-        <p class="subtitle">
-          Get help from admin copilot
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M2.499 11a.5.5 0 0 1 .477.348l.256.797a1.01 1.01 0 0 0 .63.633l.789.248a.5.5 0 0 1 .001.954l-.79.252a1.007 1.007 0 0 0-.63.633l-.252.787a.5.5 0 0 1-.95.008l-.266-.79a1.034 1.034 0 0 0-.636-.639l-.781-.252a.5.5 0 0 1-.002-.95l.794-.26a1.023 1.023 0 0 0 .636-.634l.248-.786A.5.5 0 0 1 2.5 11ZM1 7.513a1 1 0 0 1 .69-.953l2.583-.844a3.95 3.95 0 0 0 2.465-2.457l.808-2.56A1 1 0 0 1 9.452.695l.832 2.598a3.906 3.906 0 0 0 2.448 2.453l2.569.811a1 1 0 0 1 .004 1.906l-2.572.823a3.896 3.896 0 0 0-2.449 2.454l-.82 2.565a1 1 0 0 1-1.9.014l-.866-2.567v-.002A3.971 3.971 0 0 0 4.24 9.284l-2.547-.821A1 1 0 0 1 1 7.513Z"/>
-          </svg>
-        </p>
-        <div class="chips">
-          <div class="chip">What are recommendations?</div>
-          <div class="chip">What should I focus on?</div>
-          <div class="chip">What is auto assist?</div>
-          <div class="chip"><strong>Show more</strong></div>
-        </div>
-
-        <p class="section-title">Latest insights</p>
-        <div class="insight-card">
-          <div class="insight-illustration"></div>
-          <div class="insight-text">
-            <h3>Not enough data to generate insights</h3>
-            <p>Check back soon to learn about your account.</p>
-            <a href="#">Learn about latest insights ↗</a>
-          </div>
-        </div>
-
-        <p class="section-title">Recommendations</p>
-        <div class="insight-card" style="justify-content: space-between; padding: 16px 24px;">
-          <div>
-            <p style="font-size:13px; font-weight:600; margin-bottom:4px;">Review unused macro: share more info::cameras</p>
-            <p style="font-size:12px; color:#68737d;">Help agents find the right macro</p>
-          </div>
-          <span style="font-size:13px; color:#1f73b7; cursor:pointer;">View details</span>
-        </div>
+    <p class="section-title">Recommendations</p>
+    <div class="card" style="justify-content:space-between; padding:16px 24px;">
+      <div>
+        <p style="font-size:13px;font-weight:600;margin-bottom:4px;">Review unused macro: share more info::cameras</p>
+        <p style="font-size:12px;color:#68737d;">Help agents find the right macro</p>
       </div>
-
+      <span style="font-size:13px;color:#1f73b7;cursor:pointer;white-space:nowrap;">View details</span>
     </div>
-  </div>
+  </main>
+
 </div>
 
 <script>
@@ -700,8 +572,7 @@
 
   document.querySelectorAll('[data-parallax]').forEach(btn => {
     const stage = btn.querySelector('.stage');
-    let raf = null;
-    let mx = 0, my = 0;
+    let raf = null, mx = 0, my = 0;
 
     btn.addEventListener('mousemove', e => {
       const r = btn.getBoundingClientRect();
@@ -718,9 +589,7 @@
     function update() {
       raf = null;
       stage.querySelectorAll('.layer').forEach(layer => {
-        const cfg = layer.dataset.role
-          ? ROLE[layer.dataset.role]
-          : DEPTH[layer.dataset.depth];
+        const cfg = layer.dataset.role ? ROLE[layer.dataset.role] : DEPTH[layer.dataset.depth];
         if (!cfg) return;
         const tx = (mx * cfg.tx * TRAVEL).toFixed(2);
         const ty = (my * cfg.ty * TRAVEL).toFixed(2);
