@@ -6,24 +6,19 @@
   <title>Parallax Nav Icons</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: system-ui, -apple-system, sans-serif; }
 
-    html, body {
-      height: 100%;
-      font-family: system-ui, -apple-system, sans-serif;
-    }
-
-    /* ── Product grid — exact from navigation.product ── */
+    /* Product shell — bg from real Admin Center wrapper: rgb(247,247,247) */
     [data-garden-id="navigation.product"] {
       display: grid;
       grid-template-areas:
-        "banner banner banner"
-        "header header header"
-        "nav    main   sheet";
+        "header header"
+        "nav    main";
       grid-template-columns: 56px 1fr;
-      grid-template-rows: 0px 48px 1fr;
+      grid-template-rows: 48px 1fr;
       width: 100vw;
       height: 100vh;
-      background: #f8f9f9;
+      background: rgb(247, 247, 247);
     }
 
     /* ── Header ── */
@@ -31,190 +26,119 @@
       grid-area: header;
       display: flex;
       align-items: center;
-      padding: 0 16px;
-      gap: 8px;
-      background: #f8f9f9;
-      z-index: 10;
+      padding: 0 12px 0 8px;
+      gap: 0;
+      background: rgb(247, 247, 247);
     }
 
-    .header-brand {
+    /* Zendesk logo mark */
+    .header-logo {
+      width: 40px;
+      height: 40px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
       flex-shrink: 0;
     }
-    .header-brand svg { width: 24px; height: 24px; }
+    .header-logo svg { width: 20px; height: 20px; }
 
-    .header-product-name {
+    /* "Admin center ⌄" button */
+    .header-product-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      height: 32px;
+      padding: 0 8px;
+      border: none;
+      border-radius: 8px;
+      background: transparent;
       font-size: 14px;
       font-weight: 600;
-      color: #1f1f2e;
-      display: flex;
-      align-items: center;
-      gap: 3px;
+      color: #2f3941;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
-    .header-product-name svg { color: #68737d; }
+    .header-product-btn:hover { background: rgba(47,49,48,0.08); }
 
-    .header-sep {
-      width: 1px;
-      height: 20px;
-      background: #d8dcde;
+    /* "cameraobscura" plain text */
+    .header-account {
+      font-size: 14px;
+      font-weight: 600;
+      color: #2f3941;
+      padding: 0 8px;
       flex-shrink: 0;
     }
 
-    .header-account {
-      font-size: 13px;
-      color: #68737d;
-    }
-
+    /* Search — pushed right, fixed width */
     .header-search {
-      flex: 1;
-      max-width: 400px;
       margin-left: auto;
+      width: 320px;
       height: 32px;
-      border: 1px solid #d8dcde;
-      border-radius: 4px;
+      border: none;
+      border-radius: 8px;
+      background: #fff;
       display: flex;
       align-items: center;
       padding: 0 10px;
-      gap: 6px;
-      font-size: 13px;
-      color: #68737d;
-      background: #fff;
+      gap: 8px;
+      font-size: 14px;
+      color: rgb(100, 104, 100);
+      flex-shrink: 0;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
     }
 
+    /* Header action buttons area */
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 2px;
+      gap: 4px;
+      margin-left: 8px;
       flex-shrink: 0;
     }
+
+    /* Header icon button — 32×32, border-radius 8px */
     .header-icon-btn {
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: #68737d;
-      cursor: pointer;
-      background: transparent;
-      border: none;
-    }
-    .header-icon-btn:hover { background: rgba(0,0,0,0.05); }
-    .header-avatar {
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      background: #8b5cf6;
-      display: flex; align-items: center; justify-content: center;
-      color: #fff; font-size: 12px; font-weight: 600;
-      cursor: pointer;
-    }
-
-    /* ── Nav rail — exact from navigation.nav ── */
-    [data-garden-id="navigation.nav"] {
-      grid-area: nav;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 56px;
-      padding: 12px 0;
-      background: #f8f9f9;
-      z-index: 5;
-    }
-
-    [data-garden-id="navigation.nav-list"] {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      gap: 0;
-    }
-
-    [data-garden-id="navigation.nav-item"] {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-
-    /* Nav button — exact: 56×48px, no border-radius, transparent */
-    [data-garden-id="navigation.nav-button"] {
       position: relative;
-      width: 56px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
-      border: none;
-      border-radius: 0;
-      color: #5c6970;
-      cursor: pointer;
-      padding: 0;
-    }
-
-    /* Content span — the 32×32 pill that gets highlighted */
-    [data-garden-id="navigation.nav-button-content"] {
       width: 32px;
       height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
+      border: none;
       border-radius: 8px;
       background: transparent;
-      transition: background 0.15s ease;
+      color: rgb(100, 104, 100);
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+    }
+    .header-icon-btn:hover { background: rgba(47,49,48,0.08); }
+
+    /* Avatar button — circle */
+    .header-avatar-btn {
       position: relative;
-    }
-
-    [data-garden-id="navigation.nav-button"]:hover
-    [data-garden-id="navigation.nav-button-content"] {
-      background: rgba(41, 50, 57, 0.08);
-    }
-
-    [data-garden-id="navigation.nav-button"][aria-current="true"]
-    [data-garden-id="navigation.nav-button-content"] {
-      background: #293239;
-      color: #fff;
-    }
-
-    /* Tooltip */
-    [data-garden-id="navigation.nav-button"]::after {
-      content: attr(aria-label);
-      position: absolute;
-      left: calc(100% + 12px);
-      top: 50%;
-      transform: translateY(-50%);
-      background: #293239;
-      color: #fff;
-      font-size: 12px;
-      white-space: nowrap;
-      padding: 5px 10px;
-      border-radius: 4px;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.1s ease;
-      z-index: 100;
-    }
-    [data-garden-id="navigation.nav-button"]:hover::after { opacity: 1; }
-
-    /* Separator — exact: 24px wide, #d8dcde, margin 8px 16px */
-    [data-garden-id="navigation.nav-separator"] {
-      width: 24px;
-      height: 1px;
-      background: #d8dcde;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
       border: none;
-      margin: 8px 16px;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
 
-    /* ── Main content area ── */
-    [data-garden-id="navigation.main"] {
-      grid-area: main;
-      background: #fff;
-      box-shadow: rgba(10, 13, 14, 0.16) 0px 0px 4px 0px;
-      overflow-y: auto;
-      padding: 32px 40px;
+    /* Parallax stage for header buttons — 20×20 */
+    .stage-20 {
+      position: relative;
+      width: 20px;
+      height: 20px;
     }
-
-    /* ── Parallax stage inside the content span ── */
-    .stage {
+    /* Parallax stage for nav buttons — 20×20 */
+    .stage-nav {
       position: relative;
       width: 20px;
       height: 20px;
@@ -230,30 +154,119 @@
       transform: translate3d(0, 0, 0);
       transition: transform 0.4s cubic-bezier(0.2, 0, 0.1, 1);
     }
-    .layer svg {
-      width: 20px;
-      height: 20px;
-      overflow: visible;
-    }
+    .layer svg { width: 20px; height: 20px; overflow: visible; }
 
-    [data-garden-id="navigation.nav-button"]:hover .layer {
+    [data-parallax]:hover .layer {
       transition: transform 0.1s cubic-bezier(0.2, 0, 0.1, 1);
     }
 
     .layer[data-depth="shadow"] { opacity: 0.08; filter: blur(1px); }
-    .layer[data-depth="back"]   { opacity: 0.35; }
+    .layer[data-depth="back"]   { opacity: 0.38; }
     .layer[data-depth="mid"]    { opacity: 0.65; }
     .layer[data-depth="front"]  { opacity: 1; }
     .layer[data-role="fill"]    { opacity: 0.75; }
     .layer[data-role="stroke"]  { opacity: 0.45; }
 
-    /* Invert layer opacities when button is active (white icon on dark pill) */
+    /* Active nav button: white layers on dark pill */
     [data-garden-id="navigation.nav-button"][aria-current="true"] .layer[data-depth="back"]  { opacity: 0.5; }
     [data-garden-id="navigation.nav-button"][aria-current="true"] .layer[data-depth="front"] { opacity: 1; }
     [data-garden-id="navigation.nav-button"][aria-current="true"] .layer[data-role="fill"]   { opacity: 0.8; }
-    [data-garden-id="navigation.nav-button"][aria-current="true"] .layer[data-role="stroke"] { opacity: 0.55; }
+    [data-garden-id="navigation.nav-button"][aria-current="true"] .layer[data-role="stroke"] { opacity: 0.5; }
 
-    /* ── Main content area ── */
+    /* ── Nav rail ── */
+    [data-garden-id="navigation.nav"] {
+      grid-area: nav;
+      width: 56px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 0;
+      background: rgb(247, 247, 247);
+    }
+
+    [data-garden-id="navigation.nav-list"] {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    [data-garden-id="navigation.nav-item"] {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Nav button — 56×48px, no radius on button itself */
+    [data-garden-id="navigation.nav-button"] {
+      position: relative;
+      width: 56px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      color: rgb(92, 105, 112);
+      cursor: pointer;
+      padding: 0;
+    }
+
+    /* Content pill — 32×32, radius 8 */
+    [data-garden-id="navigation.nav-button-content"] {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: transparent;
+      transition: background 0.15s ease;
+      position: relative;
+    }
+    [data-garden-id="navigation.nav-button"]:hover [data-garden-id="navigation.nav-button-content"] {
+      background: rgba(41, 50, 57, 0.08);
+    }
+    [data-garden-id="navigation.nav-button"][aria-current="true"] [data-garden-id="navigation.nav-button-content"] {
+      background: #293239;
+      color: #fff;
+    }
+
+    /* Tooltip */
+    [data-garden-id="navigation.nav-button"]::after {
+      content: attr(aria-label);
+      position: absolute;
+      left: calc(100% + 10px);
+      top: 50%;
+      transform: translateY(-50%);
+      background: #1f1f2e;
+      color: #fff;
+      font-size: 12px;
+      white-space: nowrap;
+      padding: 4px 8px;
+      border-radius: 4px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.1s ease;
+      z-index: 100;
+    }
+    [data-garden-id="navigation.nav-button"]:hover::after { opacity: 1; }
+
+    /* Separator */
+    [data-garden-id="navigation.nav-separator"] {
+      width: 24px;
+      height: 1px;
+      background: #d8dcde;
+      border: none;
+      margin: 8px 16px;
+    }
+
+    /* Push last item down */
+    .nav-push { flex: 1; }
+
+    /* ── Main content ── */
     [data-garden-id="navigation.main"] {
       grid-area: main;
       background: #fff;
@@ -262,258 +275,313 @@
       padding: 32px 40px;
     }
 
-    .content-heading { font-size: 24px; font-weight: 600; color: #1f1f2e; margin-bottom: 4px; }
+    /* ── Content styles ── */
+    .content-heading { font-size: 26px; font-weight: 400; color: #2f3941; margin-bottom: 4px; }
     .content-sub { font-size: 14px; color: #68737d; display: flex; align-items: center; gap: 6px; margin-bottom: 24px; }
-    .content-sub svg { color: #8b5cf6; flex-shrink: 0; }
     .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
-    .chip { padding: 6px 14px; border: 1px solid #d8dcde; border-radius: 100px; font-size: 13px; color: #2f3941; }
-    .section-title { font-size: 15px; font-weight: 600; color: #1f1f2e; margin-bottom: 12px; }
-    .card { border: 1px solid #e9ebed; border-radius: 8px; padding: 32px; display: flex; align-items: center; justify-content: center; gap: 24px; margin-bottom: 24px; }
-    .card-illo { width: 72px; height: 56px; background: #f3f4f6; border-radius: 6px; flex-shrink: 0; }
-    .card-text h3 { font-size: 14px; font-weight: 600; color: #2f3941; margin-bottom: 4px; }
-    .card-text p  { font-size: 13px; color: #68737d; margin-bottom: 4px; }
-    .card-text a  { font-size: 13px; color: #1f73b7; text-decoration: none; }
+    .chip { padding: 8px 16px; background: rgba(100,104,100,0.08); border: none; border-radius: 100px; font-size: 14px; color: #2f3941; cursor: pointer; }
+    .chip:hover { background: rgba(100,104,100,0.14); }
+    .chip-bold { font-weight: 700; background: transparent; }
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .section-title { font-size: 18px; font-weight: 600; color: #2f3941; }
+    .section-link { font-size: 14px; color: #1f73b7; text-decoration: none; }
+    .card { border: 1px solid #e9ebed; border-radius: 8px; margin-bottom: 16px; overflow: hidden; }
+    .card-insight { padding: 24px 32px; display: flex; align-items: center; gap: 40px; }
+    .card-illo { width: 120px; height: 96px; background: #f3f4f6; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .card-text h3 { font-size: 15px; font-weight: 600; color: #2f3941; margin-bottom: 6px; }
+    .card-text p  { font-size: 14px; color: #68737d; margin-bottom: 6px; }
+    .card-text a  { font-size: 14px; color: #1f73b7; text-decoration: none; }
+    .card-row { padding: 16px 24px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; border-bottom: 1px solid #e9ebed; }
+    .card-row:last-child { border-bottom: none; }
+    .card-row-info h4 { font-size: 14px; font-weight: 700; color: #2f3941; margin-bottom: 4px; }
+    .card-row-info p  { font-size: 13px; color: #68737d; margin-bottom: 8px; }
+    .card-tag { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; background: #e8eaf6; border-radius: 4px; font-size: 12px; color: #3f51b5; }
+    .card-tag-teal { background: #e3f5f5; color: #0d6e6e; }
+    .card-row-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .btn-text { font-size: 14px; font-weight: 700; color: #2f3941; cursor: pointer; background: none; border: none; white-space: nowrap; }
+    .btn-more { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border: none; background: none; cursor: pointer; color: #68737d; border-radius: 4px; }
+    .btn-more:hover { background: rgba(0,0,0,0.05); }
   </style>
 </head>
 <body>
-
 <div data-garden-id="navigation.product">
 
-  <!-- Header -->
+  <!-- ── Header ── -->
   <header data-garden-id="navigation.header">
-    <div class="header-brand">
-      <!-- Zendesk wordmark Z -->
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <rect width="24" height="24" rx="3" fill="#1f1f2e"/>
-        <path d="M5 7.5h9.5L5 15.5V17h14v-2.5H9.5L19 6.5V5H5v2.5z" fill="#fff"/>
+
+    <!-- Zendesk logo -->
+    <div class="header-logo">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <rect width="20" height="20" rx="3" fill="#1f1f2e"/>
+        <path d="M4 6.5h8L4 13.5V15h12v-2.5H8L16 5.5V4H4v2.5z" fill="#fff"/>
       </svg>
     </div>
-    <div class="header-product-name">
+
+    <!-- "Admin center ⌄" -->
+    <button class="header-product-btn" type="button">
       Admin center
-      <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 10L3 5h10z"/></svg>
-    </div>
-    <div class="header-sep"></div>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M2.744 6.91a.833.833 0 0 1 1.179 0L9.41 12.4a.833.833 0 0 0 1.178 0l5.488-5.488a.833.833 0 1 1 1.179 1.178l-5.488 5.488a2.5 2.5 0 0 1-3.536 0L2.744 8.09a.833.833 0 0 1 0-1.178Z"/>
+      </svg>
+    </button>
+
+    <!-- account name -->
     <span class="header-account">cameraobscura</span>
+
+    <!-- Search -->
     <div class="header-search">
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-        <circle cx="7" cy="7" r="4.5" stroke="#68737d" stroke-width="1.5"/>
-        <path d="M10.5 10.5L13 13" stroke="#68737d" stroke-width="1.5" stroke-linecap="round"/>
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M9.166 2.5a6.667 6.667 0 0 1 5.266 10.753l2.824 2.824a.834.834 0 0 1-1.179 1.179l-2.824-2.824A6.667 6.667 0 1 1 9.166 2.5Zm0 1.666a5.001 5.001 0 0 0 0 10 5 5 0 0 0 0-10Z"/>
       </svg>
       Search admin center
     </div>
+
+    <!-- Action buttons -->
     <div class="header-actions">
-      <button class="header-icon-btn" aria-label="AI">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-          <path d="M2.499 11a.5.5 0 0 1 .477.348l.256.797a1.01 1.01 0 0 0 .63.633l.789.248a.5.5 0 0 1 .001.954l-.79.252a1.007 1.007 0 0 0-.63.633l-.252.787a.5.5 0 0 1-.95.008l-.266-.79a1.034 1.034 0 0 0-.636-.639l-.781-.252a.5.5 0 0 1-.002-.95l.794-.26a1.023 1.023 0 0 0 .636-.634l.248-.786A.5.5 0 0 1 2.5 11ZM1 7.513a1 1 0 0 1 .69-.953l2.583-.844a3.95 3.95 0 0 0 2.465-2.457l.808-2.56A1 1 0 0 1 9.452.695l.832 2.598a3.906 3.906 0 0 0 2.448 2.453l2.569.811a1 1 0 0 1 .004 1.906l-2.572.823a3.896 3.896 0 0 0-2.449 2.454l-.82 2.565a1 1 0 0 1-1.9.014l-.866-2.567v-.002A3.971 3.971 0 0 0 4.24 9.284l-2.547-.821A1 1 0 0 1 1 7.513Z"/>
-        </svg>
+
+      <!-- Admin Copilot sparkle — parallax, large sparkle + small accent -->
+      <button class="header-icon-btn" aria-label="Admin copilot" type="button" data-parallax>
+        <div class="stage-20">
+          <div class="layer" data-depth="shadow">
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="sg-shadow" x1="-5" y1="-5" x2="25" y2="25" gradientUnits="userSpaceOnUse">
+                  <stop offset="0.3" stop-color="#8d59b1"/>
+                  <stop offset="1" stop-color="#406cc4"/>
+                </linearGradient>
+              </defs>
+              <path fill="url(#sg-shadow)" d="M10.7981 2.2605C10.6924 1.90802 10.368 1.66663 9.99996 1.66663C9.63196 1.66663 9.30754 1.90802 9.20179 2.2605C8.60229 4.25868 7.82526 5.68364 6.75445 6.75445C5.68364 7.82526 4.25868 8.60229 2.2605 9.20179C1.90802 9.30754 1.66663 9.63196 1.66663 9.99996C1.66663 10.368 1.90802 10.6924 2.2605 10.7981C4.25868 11.3976 5.68364 12.1746 6.75445 13.2455C7.82526 14.3163 8.60229 15.7412 9.20179 17.7394C9.30754 18.0919 9.63196 18.3333 9.99996 18.3333C10.368 18.3333 10.6924 18.0919 10.7981 17.7394C11.3976 15.7412 12.1746 14.3163 13.2455 13.2455C14.3163 12.1746 15.7412 11.3976 17.7394 10.7981C18.0919 10.6924 18.3333 10.368 18.3333 9.99996C18.3333 9.63196 18.0919 9.30754 17.7394 9.20179C15.7412 8.60229 14.3163 7.82526 13.2455 6.75445C12.1746 5.68364 11.3976 4.25868 10.7981 2.2605Z"/>
+            </svg>
+          </div>
+          <!-- large star — back -->
+          <div class="layer" data-depth="back">
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="sg-back" x1="-5" y1="-5" x2="25" y2="25" gradientUnits="userSpaceOnUse">
+                  <stop offset="0.3" stop-color="#8d59b1"/>
+                  <stop offset="1" stop-color="#406cc4"/>
+                </linearGradient>
+              </defs>
+              <path fill="url(#sg-back)" d="M10.7981 2.2605C10.6924 1.90802 10.368 1.66663 9.99996 1.66663C9.63196 1.66663 9.30754 1.90802 9.20179 2.2605C8.60229 4.25868 7.82526 5.68364 6.75445 6.75445C5.68364 7.82526 4.25868 8.60229 2.2605 9.20179C1.90802 9.30754 1.66663 9.63196 1.66663 9.99996C1.66663 10.368 1.90802 10.6924 2.2605 10.7981C4.25868 11.3976 5.68364 12.1746 6.75445 13.2455C7.82526 14.3163 8.60229 15.7412 9.20179 17.7394C9.30754 18.0919 9.63196 18.3333 9.99996 18.3333C10.368 18.3333 10.6924 18.0919 10.7981 17.7394C11.3976 15.7412 12.1746 14.3163 13.2455 13.2455C14.3163 12.1746 15.7412 11.3976 17.7394 10.7981C18.0919 10.6924 18.3333 10.368 18.3333 9.99996C18.3333 9.63196 18.0919 9.30754 17.7394 9.20179C15.7412 8.60229 14.3163 7.82526 13.2455 6.75445C12.1746 5.68364 11.3976 4.25868 10.7981 2.2605Z"/>
+            </svg>
+          </div>
+          <!-- small accent star — front, floats forward -->
+          <div class="layer" data-depth="front">
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="sg-front" x1="-5" y1="-5" x2="25" y2="25" gradientUnits="userSpaceOnUse">
+                  <stop offset="0.3" stop-color="#8d59b1"/>
+                  <stop offset="1" stop-color="#406cc4"/>
+                </linearGradient>
+              </defs>
+              <!-- small sparkle accent at bottom-left, naturally floating -->
+              <path fill="url(#sg-front)" d="M4.5 13.5a.4.4 0 0 1 .38.278l.205.638a.808.808 0 0 0 .504.506l.63.198a.4.4 0 0 1 0 .764l-.63.2a.808.808 0 0 0-.504.507l-.202.629a.4.4 0 0 1-.76.006l-.213-.632a.827.827 0 0 0-.509-.511l-.625-.201a.4.4 0 0 1 0-.76l.635-.208a.819.819 0 0 0 .509-.507l.198-.628A.4.4 0 0 1 4.5 13.5Z"/>
+            </svg>
+          </div>
+        </div>
       </button>
-      <button class="header-icon-btn" aria-label="Notifications">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-          <path d="M8 0a6 6 0 0 1 6 6c0 2.348-.87 4.217-2.262 5.996L10.5 13H14v2H2v-2h3.5l-1.238-1.004C2.87 10.217 2 8.348 2 6a6 6 0 0 1 6-6zm0 14.5a1.5 1.5 0 0 0 1.5-1.5h-3a1.5 1.5 0 0 0 1.5 1.5z"/>
-        </svg>
+
+      <!-- Help circle — parallax: outer ring back, inner icon front -->
+      <button class="header-icon-btn" aria-label="Help" type="button" data-parallax>
+        <div class="stage-20">
+          <div class="layer" data-depth="shadow">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+              <path d="M3.547 4.726A8.3 8.3 0 0 0 1.667 10c0 2.001.705 3.837 1.88 5.274l3.278-3.277A3.73 3.73 0 0 1 6.25 10c0-.734.21-1.418.575-1.996zm1.179-1.178 3.277 3.277A3.73 3.73 0 0 1 10 6.25c.734 0 1.418.21 1.996.575l3.278-3.277A8.3 8.3 0 0 0 10 1.667a8.3 8.3 0 0 0-5.274 1.88Zm11.727 1.178-3.278 3.278c.364.578.575 1.262.575 1.996s-.21 1.418-.575 1.996l3.277 3.278A8.3 8.3 0 0 0 18.333 10a8.3 8.3 0 0 0-1.88-5.274Zm-1.179 11.727-3.278-3.278A3.73 3.73 0 0 1 10 13.75c-.734 0-1.418-.21-1.996-.575l-3.278 3.277A8.3 8.3 0 0 0 10 18.333a8.3 8.3 0 0 0 5.274-1.88Z"/>
+            </svg>
+          </div>
+          <!-- outer segments — back -->
+          <div class="layer" data-depth="back">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+              <path d="M3.547 4.726A8.3 8.3 0 0 0 1.667 10c0 2.001.705 3.837 1.88 5.274l3.278-3.277A3.73 3.73 0 0 1 6.25 10c0-.734.21-1.418.575-1.996zm11.727 0-3.278 3.278c.364.578.575 1.262.575 1.996s-.21 1.418-.575 1.996l3.277 3.278A8.3 8.3 0 0 0 18.333 10a8.3 8.3 0 0 0-1.88-5.274Z"/>
+            </svg>
+          </div>
+          <!-- inner cross pieces — front -->
+          <div class="layer" data-depth="front">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+              <path d="M4.726 3.547 8.004 6.825A3.73 3.73 0 0 1 10 6.25c.734 0 1.418.21 1.996.575l3.278-3.277A8.3 8.3 0 0 0 10 1.667a8.3 8.3 0 0 0-5.274 1.88Zm1.528 9.928-3.278 3.277A8.3 8.3 0 0 0 10 18.333a8.3 8.3 0 0 0 5.274-1.88l-3.278-3.278A3.73 3.73 0 0 1 10 13.75c-.734 0-1.418-.21-1.996-.575l-.75.3Z"/>
+            </svg>
+          </div>
+        </div>
       </button>
-      <div class="header-avatar">J</div>
+
+      <!-- User avatar — parallax: silhouette body back, head front -->
+      <button class="header-avatar-btn" aria-label="Profile" type="button" data-parallax>
+        <div class="stage-20">
+          <div class="layer" data-depth="shadow">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+              <path d="M10 1.667a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5ZM10.001 10c-3.193 0-5.637 1.914-6.63 4.597a2.052 2.052 0 0 0 .362 2.06c.44.524 1.118.843 1.849.843h8.838c.731 0 1.41-.319 1.85-.843a2.052 2.052 0 0 0 .36-2.06C15.639 11.914 13.196 10 10.002 10Z"/>
+            </svg>
+          </div>
+          <!-- body — back -->
+          <div class="layer" data-depth="back">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+              <path d="M10.001 10c-3.193 0-5.637 1.914-6.63 4.597a2.052 2.052 0 0 0 .362 2.06c.44.524 1.118.843 1.849.843h8.838c.731 0 1.41-.319 1.85-.843a2.052 2.052 0 0 0 .36-2.06C15.639 11.914 13.196 10 10.002 10Z"/>
+            </svg>
+          </div>
+          <!-- head — front -->
+          <div class="layer" data-depth="front">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+              <path d="M10 1.667a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5Z"/>
+            </svg>
+          </div>
+        </div>
+      </button>
+
     </div>
   </header>
 
-  <!-- Nav rail -->
+  <!-- ── Nav rail ── -->
   <nav data-garden-id="navigation.nav" aria-label="Main">
     <ul data-garden-id="navigation.nav-list">
 
-      <!-- Home — active -->
+      <!-- Home — active (dark pill, white icon) -->
       <li data-garden-id="navigation.nav-item">
         <button data-garden-id="navigation.nav-button" aria-current="true" aria-label="Home" type="button" data-parallax>
           <span data-garden-id="navigation.nav-button-content">
-            <div class="stage">
+            <div class="stage-nav">
               <div class="layer" data-depth="shadow">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M11.416 2.88a2.5 2.5 0 0 0-2.832 0l-5 3.437A2.5 2.5 0 0 0 2.5 8.377V15A2.5 2.5 0 0 0 5 17.5h2.083c.46 0 .834-.373.834-.833V13.75a2.083 2.083 0 0 1 4.166 0v2.917c0 .46.373.833.834.833H15a2.5 2.5 0 0 0 2.5-2.5V8.377a2.5 2.5 0 0 0-1.084-2.06l-5-3.438Z"/>
-                </svg>
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M11.416 2.88a2.5 2.5 0 0 0-2.832 0l-5 3.437A2.5 2.5 0 0 0 2.5 8.377V15A2.5 2.5 0 0 0 5 17.5h2.083c.46 0 .834-.373.834-.833V13.75a2.083 2.083 0 0 1 4.166 0v2.917c0 .46.373.833.834.833H15a2.5 2.5 0 0 0 2.5-2.5V8.377a2.5 2.5 0 0 0-1.084-2.06l-5-3.438Z"/></svg>
               </div>
-              <!-- door/base -->
               <div class="layer" data-role="fill">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M11.416 2.88a2.5 2.5 0 0 0-2.832 0l-5 3.437A2.5 2.5 0 0 0 2.5 8.377V15A2.5 2.5 0 0 0 5 17.5h2.083c.46 0 .834-.373.834-.833V13.75a2.083 2.083 0 0 1 4.166 0v2.917c0 .46.373.833.834.833H15a2.5 2.5 0 0 0 2.5-2.5V8.377a2.5 2.5 0 0 0-1.084-2.06l-5-3.438Z"/>
-                </svg>
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M11.416 2.88a2.5 2.5 0 0 0-2.832 0l-5 3.437A2.5 2.5 0 0 0 2.5 8.377V15A2.5 2.5 0 0 0 5 17.5h2.083c.46 0 .834-.373.834-.833V13.75a2.083 2.083 0 0 1 4.166 0v2.917c0 .46.373.833.834.833H15a2.5 2.5 0 0 0 2.5-2.5V8.377a2.5 2.5 0 0 0-1.084-2.06l-5-3.438Z"/></svg>
               </div>
-              <!-- roof outline -->
               <div class="layer" data-role="stroke">
-                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
-                  <path stroke="currentColor" stroke-width="1.2" d="M2.5 9.5L10 3.5l7.5 6M5 17.5V10h10v7.5"/>
-                </svg>
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-width="1.2" d="M2.5 9.5 10 3.5l7.5 6M5 17.5V10h10v7.5"/></svg>
               </div>
             </div>
           </span>
         </button>
       </li>
 
-      <!-- Views (inbox tray icon) -->
+      <!-- Account / Building (windows + shell) -->
       <li data-garden-id="navigation.nav-item">
-        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="Views" type="button" data-parallax>
+        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="Account" type="button" data-parallax>
           <span data-garden-id="navigation.nav-button-content">
-            <div class="stage">
-              <div class="layer" data-depth="shadow">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M5 2.5h10A2.5 2.5 0 0 1 17.5 5v5h-4.272a.833.833 0 0 0-.807.626 2.501 2.501 0 0 1-4.842 0A.833.833 0 0 0 6.772 10H2.5V5A2.5 2.5 0 0 1 5 2.5Z M17.5 11.667V15a2.5 2.5 0 0 1-2.5 2.5H5A2.5 2.5 0 0 1 2.5 15v-3.333h3.68a4.167 4.167 0 0 0 7.64 0h3.68Z"/>
-                </svg>
-              </div>
-              <!-- tray body -->
-              <div class="layer" data-depth="back">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M17.5 11.667V15a2.5 2.5 0 0 1-2.5 2.5H5A2.5 2.5 0 0 1 2.5 15v-3.333h3.68a4.167 4.167 0 0 0 7.64 0h3.68Z"/>
-                </svg>
-              </div>
-              <!-- tray top -->
-              <div class="layer" data-depth="front">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M5 2.5h10A2.5 2.5 0 0 1 17.5 5v5h-4.272a.833.833 0 0 0-.807.626 2.501 2.501 0 0 1-4.842 0A.833.833 0 0 0 6.772 10H2.5V5A2.5 2.5 0 0 1 5 2.5Z"/>
-                </svg>
-              </div>
+            <div class="stage-nav">
+              <div class="layer" data-depth="shadow"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M16.667 15.833V5a2.5 2.5 0 0 0-2.5-2.5H5.833a2.5 2.5 0 0 0-2.5 2.5v10.833H2.5a.833.833 0 0 0 0 1.667h15a.833.833 0 1 0 0-1.667h-.833Zm-9.167-10h.833a.833.833 0 1 1 0 1.667H7.5a.833.833 0 0 1 0-1.667Zm4.167 0h.833a.833.833 0 1 1 0 1.667h-.833a.833.833 0 1 1 0-1.667ZM7.5 9.167h.833a.833.833 0 1 1 0 1.666H7.5a.833.833 0 0 1 0-1.666Zm4.167 0h.833a.833.833 0 1 1 0 1.666h-.833a.833.833 0 1 1 0-1.666ZM7.5 12.5h.833a.833.833 0 1 1 0 1.667H7.5a.833.833 0 0 1 0-1.667Zm4.167 0h.833a.833.833 0 1 1 0 1.667h-.833a.833.833 0 1 1 0-1.667Z"/></svg></div>
+              <div class="layer" data-depth="back"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M7.5 5.833h.833a.833.833 0 1 1 0 1.667H7.5a.833.833 0 0 1 0-1.667Zm4.167 0h.833a.833.833 0 1 1 0 1.667h-.833a.833.833 0 1 1 0-1.667ZM7.5 9.167h.833a.833.833 0 1 1 0 1.666H7.5a.833.833 0 0 1 0-1.666Zm4.167 0h.833a.833.833 0 1 1 0 1.666h-.833a.833.833 0 1 1 0-1.666ZM7.5 12.5h.833a.833.833 0 1 1 0 1.667H7.5a.833.833 0 0 1 0-1.667Zm4.167 0h.833a.833.833 0 1 1 0 1.667h-.833a.833.833 0 1 1 0-1.667Z"/></svg></div>
+              <div class="layer" data-depth="front"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M16.667 15.833V5a2.5 2.5 0 0 0-2.5-2.5H5.833a2.5 2.5 0 0 0-2.5 2.5v10.833H2.5a.833.833 0 0 0 0 1.667h15a.833.833 0 1 0 0-1.667h-.833Z"/></svg></div>
             </div>
           </span>
         </button>
       </li>
 
-      <!-- Customer lists (two people) -->
+      <!-- People / Customer lists -->
       <li data-garden-id="navigation.nav-item">
-        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="Customer lists" type="button" data-parallax>
+        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="People" type="button" data-parallax>
           <span data-garden-id="navigation.nav-button-content">
-            <div class="stage">
-              <div class="layer" data-depth="shadow">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M2.916 5.833a3.333 3.333 0 1 1 6.666 0 3.333 3.333 0 0 1-6.666 0Zm7.5 0a3.333 3.333 0 1 1 6.666 0 3.333 3.333 0 0 1-6.666 0ZM6.249 10c2.392 0 4.662 1.65 5.506 4.678.442 1.583-.908 2.822-2.294 2.822H3.037c-1.386 0-2.736-1.24-2.294-2.822C1.587 11.65 3.857 10 6.249 10Zm7.112 4.23c-.406-1.457-1.105-2.69-2.004-3.645A5.189 5.189 0 0 1 13.75 10c2.392 0 4.661 1.65 5.506 4.678.441 1.583-.909 2.822-2.295 2.822h-4.186c.64-.87.932-2.03.586-3.27Z"/>
-                </svg>
-              </div>
-              <!-- back person -->
-              <div class="layer" data-depth="back">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M10.416 5.833a3.333 3.333 0 1 1 6.666 0 3.333 3.333 0 0 1-6.666 0Zm3.945 4.397c-.406-1.457-1.105-2.69-2.004-3.645A5.189 5.189 0 0 1 13.75 10c2.392 0 4.661 1.65 5.506 4.678.441 1.583-.909 2.822-2.295 2.822h-4.186c.64-.87.932-2.03.586-3.27Z"/>
-                </svg>
-              </div>
-              <!-- front person -->
-              <div class="layer" data-depth="front">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M2.916 5.833a3.333 3.333 0 1 1 6.666 0 3.333 3.333 0 0 1-6.666 0ZM6.249 10c2.392 0 4.662 1.65 5.506 4.678.442 1.583-.908 2.822-2.294 2.822H3.037c-1.386 0-2.736-1.24-2.294-2.822C1.587 11.65 3.857 10 6.249 10Z"/>
-                </svg>
-              </div>
+            <div class="stage-nav">
+              <div class="layer" data-depth="shadow"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M2.916 5.833a3.333 3.333 0 1 1 6.666 0 3.333 3.333 0 0 1-6.666 0Zm7.5 0a3.333 3.333 0 1 1 6.666 0 3.333 3.333 0 0 1-6.666 0ZM6.249 10c2.392 0 4.662 1.65 5.506 4.678.442 1.583-.908 2.822-2.294 2.822H3.037c-1.386 0-2.736-1.24-2.294-2.822C1.587 11.65 3.857 10 6.249 10Zm7.112 4.23c-.406-1.457-1.105-2.69-2.004-3.645A5.189 5.189 0 0 1 13.75 10c2.392 0 4.661 1.65 5.506 4.678.441 1.583-.909 2.822-2.295 2.822h-4.186c.64-.87.932-2.03.586-3.27Z"/></svg></div>
+              <div class="layer" data-depth="back"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10.416 5.833a3.333 3.333 0 1 1 6.666 0 3.333 3.333 0 0 1-6.666 0Zm3.945 4.397c-.406-1.457-1.105-2.69-2.004-3.645A5.189 5.189 0 0 1 13.75 10c2.392 0 4.661 1.65 5.506 4.678.441 1.583-.909 2.822-2.295 2.822h-4.186c.64-.87.932-2.03.586-3.27Z"/></svg></div>
+              <div class="layer" data-depth="front"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M2.916 5.833a3.333 3.333 0 1 1 6.666 0 3.333 3.333 0 0 1-6.666 0ZM6.249 10c2.392 0 4.662 1.65 5.506 4.678.442 1.583-.908 2.822-2.294 2.822H3.037c-1.386 0-2.736-1.24-2.294-2.822C1.587 11.65 3.857 10 6.249 10Z"/></svg></div>
             </div>
           </span>
         </button>
       </li>
 
-      <!-- Organizations (building) -->
+      <!-- Channels / Send arrow -->
       <li data-garden-id="navigation.nav-item">
-        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="Organizations" type="button" data-parallax>
+        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="Channels" type="button" data-parallax>
           <span data-garden-id="navigation.nav-button-content">
-            <div class="stage">
-              <div class="layer" data-depth="shadow">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M16.667 15.833V5a2.5 2.5 0 0 0-2.5-2.5H5.833a2.5 2.5 0 0 0-2.5 2.5v10.833H2.5a.833.833 0 0 0 0 1.667h15a.833.833 0 1 0 0-1.667h-.833Zm-9.167-10h.833a.833.833 0 1 1 0 1.667H7.5a.833.833 0 0 1 0-1.667Zm4.167 0h.833a.833.833 0 1 1 0 1.667h-.833a.833.833 0 1 1 0-1.667ZM7.5 9.167h.833a.833.833 0 1 1 0 1.666H7.5a.833.833 0 0 1 0-1.666Zm4.167 0h.833a.833.833 0 1 1 0 1.666h-.833a.833.833 0 1 1 0-1.666ZM7.5 12.5h.833a.833.833 0 1 1 0 1.667H7.5a.833.833 0 0 1 0-1.667Zm4.167 0h.833a.833.833 0 1 1 0 1.667h-.833a.833.833 0 1 1 0-1.667Z"/>
-                </svg>
-              </div>
-              <!-- windows -->
-              <div class="layer" data-depth="back">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M7.5 5.833h.833a.833.833 0 1 1 0 1.667H7.5a.833.833 0 0 1 0-1.667Zm4.167 0h.833a.833.833 0 1 1 0 1.667h-.833a.833.833 0 1 1 0-1.667ZM7.5 9.167h.833a.833.833 0 1 1 0 1.666H7.5a.833.833 0 0 1 0-1.666Zm4.167 0h.833a.833.833 0 1 1 0 1.666h-.833a.833.833 0 1 1 0-1.666ZM7.5 12.5h.833a.833.833 0 1 1 0 1.667H7.5a.833.833 0 0 1 0-1.667Zm4.167 0h.833a.833.833 0 1 1 0 1.667h-.833a.833.833 0 1 1 0-1.667Z"/>
-                </svg>
-              </div>
-              <!-- building shell -->
-              <div class="layer" data-depth="front">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M16.667 15.833V5a2.5 2.5 0 0 0-2.5-2.5H5.833a2.5 2.5 0 0 0-2.5 2.5v10.833H2.5a.833.833 0 0 0 0 1.667h15a.833.833 0 1 0 0-1.667h-.833Z" fill-rule="evenodd" clip-rule="evenodd"/>
-                </svg>
-              </div>
+            <div class="stage-nav">
+              <div class="layer" data-depth="shadow"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M2.335 4.643c-.466-1.4.983-2.671 2.31-2.025L16.74 8.5c1.25.609 1.25 2.39 0 2.998L4.646 17.383c-1.328.646-2.777-.626-2.31-2.026l1.507-4.524H7.5a.833.833 0 1 0 0-1.666H3.843z"/></svg></div>
+              <div class="layer" data-depth="back"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M4.645 17.383c-1.328.646-2.777-.626-2.31-2.026l1.507-4.524H7.5a.833.833 0 1 0 0-1.666H3.843L2.335 4.643c-.466-1.4.983-2.671 2.31-2.025L16.74 8.5z"/></svg></div>
+              <div class="layer" data-depth="front"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M16.74 8.5 4.645 2.618C3.317 1.972 1.869 3.243 2.335 4.643l1.508 4.524H7.5a.833.833 0 1 1 0 1.666H3.843l-1.507 4.524c-.467 1.4.982 2.672 2.31 2.026L16.74 11.498c1.25-.609 1.25-2.39 0-2.998Z"/></svg></div>
             </div>
           </span>
         </button>
       </li>
 
-      <!-- Custom objects (shapes) -->
+      <!-- AI / Sparkle -->
       <li data-garden-id="navigation.nav-item">
-        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="Custom objects" type="button" data-parallax>
+        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="AI" type="button" data-parallax>
           <span data-garden-id="navigation.nav-button-content">
-            <div class="stage">
-              <div class="layer" data-depth="shadow">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M6.155 7.401a.882.882 0 0 0 .764 1.324h6.113a.882.882 0 0 0 .764-1.324L10.74 2.108a.882.882 0 0 0-1.528 0L6.155 7.4Zm8.232 3.088a3.529 3.529 0 1 0 0 7.058 3.529 3.529 0 0 0 0-7.058ZM2.918 12.474c0-.974.79-1.764 1.764-1.764H7.77c.975 0 1.764.79 1.764 1.764v3.088c0 .974-.79 1.764-1.764 1.764H4.682c-.974 0-1.764-.79-1.764-1.764v-3.088Z"/>
-                </svg>
-              </div>
-              <!-- circle -->
-              <div class="layer" data-depth="back">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M14.387 10.49a3.529 3.529 0 1 0 0 7.058 3.529 3.529 0 0 0 0-7.058Z"/>
-                </svg>
-              </div>
-              <!-- square -->
-              <div class="layer" data-depth="mid">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M2.918 12.474c0-.974.79-1.764 1.764-1.764H7.77c.975 0 1.764.79 1.764 1.764v3.088c0 .974-.79 1.764-1.764 1.764H4.682c-.974 0-1.764-.79-1.764-1.764v-3.088Z"/>
-                </svg>
-              </div>
-              <!-- triangle -->
-              <div class="layer" data-depth="front">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M6.155 7.401a.882.882 0 0 0 .764 1.324h6.113a.882.882 0 0 0 .764-1.324L10.74 2.108a.882.882 0 0 0-1.528 0L6.155 7.4Z"/>
-                </svg>
-              </div>
+            <div class="stage-nav">
+              <div class="layer" data-depth="shadow"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M15.739 1.954a.324.324 0 0 0-.644 0c-.088.762-.315 1.284-.669 1.639-.354.354-.877.58-1.64.668a.324.324 0 0 0 .002.644c.748.085 1.283.311 1.647.668.361.355.592.877.659 1.632a.324.324 0 0 0 .646-.001c.064-.742.294-1.275.658-1.64.364-.363.898-.594 1.64-.658a.324.324 0 0 0 0-.645c-.754-.067-1.276-.298-1.631-.66-.357-.363-.584-.898-.668-1.647ZM9.995 4.073a.833.833 0 0 0-1.65.173c-.157 1.493-.63 2.548-1.37 3.294-.74.745-1.797 1.218-3.29 1.374a.833.833 0 0 0 .002 1.657c1.476.163 2.547.634 3.296 1.376.746.74 1.22 1.795 1.375 3.286a.833.833 0 0 0 1.652-.002c.148-1.476.617-2.543 1.358-3.29.74-.748 1.804-1.22 3.293-1.373a.833.833 0 0 0 .003-1.657c-1.502-.16-2.554-.633-3.288-1.37-.737-.74-1.21-1.798-1.38-3.468Z"/></svg></div>
+              <!-- large sparkle body — back -->
+              <div class="layer" data-depth="back"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.995 4.073a.833.833 0 0 0-1.65.173c-.157 1.493-.63 2.548-1.37 3.294-.74.745-1.797 1.218-3.29 1.374a.833.833 0 0 0 .002 1.657c1.476.163 2.547.634 3.296 1.376.746.74 1.22 1.795 1.375 3.286a.833.833 0 0 0 1.652-.002c.148-1.476.617-2.543 1.358-3.29.74-.748 1.804-1.22 3.293-1.373a.833.833 0 0 0 .003-1.657c-1.502-.16-2.554-.633-3.288-1.37-.737-.74-1.21-1.798-1.38-3.468Z"/></svg></div>
+              <!-- small top-right sparkle — front -->
+              <div class="layer" data-depth="front"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M15.739 1.954a.324.324 0 0 0-.644 0c-.088.762-.315 1.284-.669 1.639-.354.354-.877.58-1.64.668a.324.324 0 0 0 .002.644c.748.085 1.283.311 1.647.668.361.355.592.877.659 1.632a.324.324 0 0 0 .646-.001c.064-.742.294-1.275.658-1.64.364-.363.898-.594 1.64-.658a.324.324 0 0 0 0-.645c-.754-.067-1.276-.298-1.631-.66-.357-.363-.584-.898-.668-1.647Z"/></svg></div>
             </div>
           </span>
         </button>
       </li>
 
-      <!-- Reporting (EKG/pulse) -->
+      <!-- Workspaces / Monitor -->
       <li data-garden-id="navigation.nav-item">
-        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="Reporting" type="button" data-parallax>
+        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="Workspaces" type="button" data-parallax>
           <span data-garden-id="navigation.nav-button-content">
-            <div class="stage">
-              <div class="layer" data-depth="shadow">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M5 2.5A2.5 2.5 0 0 0 2.5 5v4.167h3.652c.63 0 1.208.356 1.49.921l.691 1.382 2.588-5.176a.833.833 0 0 1 1.491 0l1.436 2.873H17.5V5A2.5 2.5 0 0 0 15 2.5H5Z M2.5 15A2.5 2.5 0 0 0 5 17.5h10a2.5 2.5 0 0 0 2.5-2.5v-4.166h-3.652a1.666 1.666 0 0 1-1.49-.922l-.691-1.382-2.588 5.176a.833.833 0 0 1-1.491 0l-1.436-2.872H2.5V15Z"/>
-                </svg>
-              </div>
-              <!-- bottom half -->
-              <div class="layer" data-depth="back">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M2.5 15A2.5 2.5 0 0 0 5 17.5h10a2.5 2.5 0 0 0 2.5-2.5v-4.166h-3.652a1.666 1.666 0 0 1-1.49-.922l-.691-1.382-2.588 5.176a.833.833 0 0 1-1.491 0l-1.436-2.872H2.5V15Z"/>
-                </svg>
-              </div>
-              <!-- top half with pulse -->
-              <div class="layer" data-depth="front">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M5 2.5A2.5 2.5 0 0 0 2.5 5v4.167h3.652c.63 0 1.208.356 1.49.921l.691 1.382 2.588-5.176a.833.833 0 0 1 1.491 0l1.436 2.873H17.5V5A2.5 2.5 0 0 0 15 2.5H5Z"/>
-                </svg>
-              </div>
+            <div class="stage-nav">
+              <div class="layer" data-depth="shadow"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M1.667 5a2.5 2.5 0 0 1 2.5-2.5h11.666a2.5 2.5 0 0 1 2.5 2.5v6.667a2.5 2.5 0 0 1-2.5 2.5H4.167a2.5 2.5 0 0 1-2.5-2.5zm3.604 12.455a14.5 14.5 0 0 1 4.73-.788c1.653 0 3.242.277 4.728.788a.833.833 0 0 0 .542-1.576 16.2 16.2 0 0 0-5.27-.879 16.2 16.2 0 0 0-5.272.879.833.833 0 1 0 .542 1.576"/></svg></div>
+              <!-- stand -->
+              <div class="layer" data-depth="back"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5.271 17.455a14.5 14.5 0 0 1 4.73-.788c1.653 0 3.242.277 4.728.788a.833.833 0 0 0 .542-1.576 16.2 16.2 0 0 0-5.27-.879 16.2 16.2 0 0 0-5.272.879.833.833 0 1 0 .542 1.576Z"/></svg></div>
+              <!-- screen -->
+              <div class="layer" data-depth="front"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M1.667 5a2.5 2.5 0 0 1 2.5-2.5h11.666a2.5 2.5 0 0 1 2.5 2.5v6.667a2.5 2.5 0 0 1-2.5 2.5H4.167a2.5 2.5 0 0 1-2.5-2.5Z"/></svg></div>
             </div>
           </span>
         </button>
       </li>
 
-      <li aria-hidden="true" data-garden-id="navigation.nav-item" style="width:100%; display:flex; justify-content:center;">
+      <!-- Objects & Rules / recycle arrows -->
+      <li data-garden-id="navigation.nav-item">
+        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="Objects &amp; Rules" type="button" data-parallax>
+          <span data-garden-id="navigation.nav-button-content">
+            <div class="stage-nav">
+              <div class="layer" data-depth="shadow"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.25a2.917 2.917 0 0 0-2.906 2.667 7.52 7.52 0 0 0-4.22 4.573.833.833 0 0 0 1.583.52 5.85 5.85 0 0 1 2.994-3.425 2.916 2.916 0 0 0 5.466-1.418A2.917 2.917 0 0 0 10 1.25m5.656 4.658A.833.833 0 1 0 14.4 7.003a5.8 5.8 0 0 1 1.419 4.247 2.916 2.916 0 1 0 1.622.528 7.47 7.47 0 0 0-1.785-5.87m-8.905 6.8a2.916 2.916 0 1 0-1.287 4.099A7.47 7.47 0 0 0 10 18.333q.721-.001 1.41-.134a.833.833 0 1 0-.321-1.634 5.8 5.8 0 0 1-4.338-.857"/></svg></div>
+              <div class="layer" data-depth="back"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.25a2.917 2.917 0 0 0-2.906 2.667 7.52 7.52 0 0 0-4.22 4.573.833.833 0 0 0 1.583.52 5.85 5.85 0 0 1 2.994-3.425 2.916 2.916 0 0 0 5.466-1.418A2.917 2.917 0 0 0 10 1.25Z"/></svg></div>
+              <div class="layer" data-depth="mid"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M6.751 12.708a2.916 2.916 0 1 0-1.287 4.099A7.47 7.47 0 0 0 10 18.333q.721-.001 1.41-.134a.833.833 0 1 0-.321-1.634 5.8 5.8 0 0 1-4.338-.857Z"/></svg></div>
+              <div class="layer" data-depth="front"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M15.656 5.908A.833.833 0 1 0 14.4 7.003a5.8 5.8 0 0 1 1.419 4.247 2.916 2.916 0 1 0 1.622.528 7.47 7.47 0 0 0-1.785-5.87Z"/></svg></div>
+            </div>
+          </span>
+        </button>
+      </li>
+
+      <!-- Apps & Integrations / 2×2 grid -->
+      <li data-garden-id="navigation.nav-item">
+        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="Apps &amp; Integrations" type="button" data-parallax>
+          <span data-garden-id="navigation.nav-button-content">
+            <div class="stage-nav">
+              <div class="layer" data-depth="shadow"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M2.502 5A2.5 2.5 0 0 1 5 2.502h1.667A2.5 2.5 0 0 1 9.165 5v1.666a2.5 2.5 0 0 1-2.498 2.498H5a2.5 2.5 0 0 1-2.498-2.498zm0 8.333A2.5 2.5 0 0 1 5 10.835h1.667a2.5 2.5 0 0 1 2.498 2.498V15a2.5 2.5 0 0 1-2.498 2.497H5A2.5 2.5 0 0 1 2.502 15zM10.835 5a2.5 2.5 0 0 1 2.498-2.498H15A2.5 2.5 0 0 1 17.498 5v1.666A2.5 2.5 0 0 1 15 9.164h-1.667a2.5 2.5 0 0 1-2.498-2.498zm0 8.333a2.5 2.5 0 0 1 2.498-2.498H15a2.5 2.5 0 0 1 2.498 2.498V15A2.5 2.5 0 0 1 15 17.497h-1.667a2.5 2.5 0 0 1-2.498-2.497z"/></svg></div>
+              <!-- top-left + bottom-right — back diagonal -->
+              <div class="layer" data-depth="back"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M2.502 5A2.5 2.5 0 0 1 5 2.502h1.667A2.5 2.5 0 0 1 9.165 5v1.666a2.5 2.5 0 0 1-2.498 2.498H5a2.5 2.5 0 0 1-2.498-2.498zm8.333 8.333a2.5 2.5 0 0 1 2.498-2.498H15a2.5 2.5 0 0 1 2.498 2.498V15A2.5 2.5 0 0 1 15 17.497h-1.667a2.5 2.5 0 0 1-2.498-2.497z"/></svg></div>
+              <!-- top-right + bottom-left — front diagonal -->
+              <div class="layer" data-depth="front"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10.835 5a2.5 2.5 0 0 1 2.498-2.498H15A2.5 2.5 0 0 1 17.498 5v1.666A2.5 2.5 0 0 1 15 9.164h-1.667a2.5 2.5 0 0 1-2.498-2.498zm-8.333 8.333A2.5 2.5 0 0 1 5 10.835h1.667a2.5 2.5 0 0 1 2.498 2.498V15a2.5 2.5 0 0 1-2.498 2.497H5A2.5 2.5 0 0 1 2.502 15z"/></svg></div>
+            </div>
+          </span>
+        </button>
+      </li>
+
+      <!-- Laptop/Phone — Asset Management -->
+      <li data-garden-id="navigation.nav-item">
+        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="Asset Management" type="button" data-parallax>
+          <span data-garden-id="navigation.nav-button-content">
+            <div class="stage-nav">
+              <div class="layer" data-depth="shadow"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M14.167 14.167a.833.833 0 1 0 0 1.666H15a.833.833 0 0 0 0-1.666zM2.5 5A2.5 2.5 0 0 1 5 2.5h10A2.5 2.5 0 0 1 17.5 5v1.809a2.5 2.5 0 0 1 1.667 2.358v6.666a2.5 2.5 0 0 1-2.5 2.5H12.5a2.5 2.5 0 0 1-1.863-.833H3.333a2.5 2.5 0 0 1-2.5-2.5v-1.667c0-.46.373-.833.834-.833H2.5zm9.167 10.833c0 .46.373.834.833.834h4.167c.46 0 .833-.373.833-.834V9.167a.833.833 0 0 0-.833-.834H12.5a.833.833 0 0 0-.833.834z"/></svg></div>
+              <!-- phone -->
+              <div class="layer" data-depth="back"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M11.667 15.833c0 .46.373.834.833.834h4.167c.46 0 .833-.373.833-.834V9.167a.833.833 0 0 0-.833-.834H12.5a.833.833 0 0 0-.833.834zm2.5-1.666a.833.833 0 1 1 0 1.666H15a.833.833 0 0 0 0-1.666z"/></svg></div>
+              <!-- laptop -->
+              <div class="layer" data-depth="front"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M2.5 5A2.5 2.5 0 0 1 5 2.5h10A2.5 2.5 0 0 1 17.5 5v1.809a2.5 2.5 0 0 1 1.667 2.358v.166H2.5V5zm0 5.333h9.667v1.834H3.333a2.5 2.5 0 0 1-2.5-2.5v-.167H2.5z"/></svg></div>
+            </div>
+          </span>
+        </button>
+      </li>
+
+      <div class="nav-push"></div>
+
+      <li aria-hidden="true" data-garden-id="navigation.nav-item" style="width:100%;display:flex;justify-content:center;">
         <hr data-garden-id="navigation.nav-separator"/>
       </li>
 
-      <!-- Settings (gear) — pushed to bottom -->
-      <li data-garden-id="navigation.nav-item" style="margin-top:auto;">
-        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="Settings" type="button" data-parallax>
+      <!-- Success Hub / Rocket -->
+      <li data-garden-id="navigation.nav-item">
+        <button data-garden-id="navigation.nav-button" aria-current="false" aria-label="Success Hub" type="button" data-parallax>
           <span data-garden-id="navigation.nav-button-content">
-            <div class="stage">
-              <div class="layer" data-depth="shadow">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M8.154 2.654a2.218 2.218 0 0 1 3.692 0l.463.696c.188.281.53.417.86.34l.571-.131a2.252 2.252 0 0 1 2.701 2.7l-.132.573c-.076.33.06.671.341.859l.696.463a2.218 2.218 0 0 1 0 3.692l-.696.463a.813.813 0 0 0-.34.86l.131.571a2.252 2.252 0 0 1-2.7 2.701l-.573-.132a.813.813 0 0 0-.859.341l-.463.696a2.218 2.218 0 0 1-3.692 0l-.463-.696a.813.813 0 0 0-.86-.34l-.571.131a2.252 2.252 0 0 1-2.701-2.7l.132-.573a.813.813 0 0 0-.341-.859l-.696-.463a2.218 2.218 0 0 1 0-3.692l.696-.463a.813.813 0 0 0 .34-.86l-.13-.571a2.252 2.252 0 0 1 2.7-2.701l.573.132c.33.076.671-.06.859-.341l.463-.696ZM7.084 10a2.917 2.917 0 1 0 5.833 0 2.917 2.917 0 0 0-5.834 0Z"/>
-                </svg>
-              </div>
-              <!-- inner circle -->
-              <div class="layer" data-depth="back">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M7.084 10a2.917 2.917 0 1 0 5.833 0 2.917 2.917 0 0 0-5.834 0Z"/>
-                </svg>
-              </div>
-              <!-- outer cog ring -->
-              <div class="layer" data-depth="front">
-                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M8.154 2.654a2.218 2.218 0 0 1 3.692 0l.463.696c.188.281.53.417.86.34l.571-.131a2.252 2.252 0 0 1 2.701 2.7l-.132.573c-.076.33.06.671.341.859l.696.463a2.218 2.218 0 0 1 0 3.692l-.696.463a.813.813 0 0 0-.34.86l.131.571a2.252 2.252 0 0 1-2.7 2.701l-.573-.132a.813.813 0 0 0-.859.341l-.463.696a2.218 2.218 0 0 1-3.692 0l-.463-.696a.813.813 0 0 0-.86-.34l-.571.131a2.252 2.252 0 0 1-2.701-2.7l.132-.573a.813.813 0 0 0-.341-.859l-.696-.463a2.218 2.218 0 0 1 0-3.692l.696-.463a.813.813 0 0 0 .34-.86l-.13-.571a2.252 2.252 0 0 1 2.7-2.701l.573.132c.33.076.671-.06.859-.341l.463-.696Z"/>
-                </svg>
-              </div>
+            <div class="stage-nav">
+              <div class="layer" data-depth="shadow"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M12.5 12.427 10 14.552v1.476l2.095-1.257a.83.83 0 0 0 .405-.715v-1.63Zm-4.167 2.085-2.845-2.846H3.972c-1.296 0-2.096-1.413-1.43-2.524L3.8 7.047a2.5 2.5 0 0 1 2.144-1.214h3.068c2.104-2.225 4.489-3.86 7.583-4.128a1.567 1.567 0 0 1 1.7 1.7c-.27 3.094-1.903 5.479-4.128 7.583v3.068a2.5 2.5 0 0 1-1.214 2.144l-2.095 1.257c-1.111.667-2.525-.134-2.525-1.429ZM7.573 7.5h-1.63a.83.83 0 0 0-.714.405L3.972 9.666h1.476L7.573 7.5ZM0 16.875A2.5 2.5 0 1 1 2.5 19.167H.833A.833.833 0 0 1 0 18.333z"/></svg></div>
+              <!-- body -->
+              <div class="layer" data-depth="back"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8.333 14.512 5.488 11.666H3.972c-1.296 0-2.096-1.413-1.43-2.524L3.8 7.047a2.5 2.5 0 0 1 2.144-1.214h3.068c2.104-2.225 4.489-3.86 7.583-4.128a1.567 1.567 0 0 1 1.7 1.7c-.27 3.094-1.903 5.479-4.128 7.583v3.068a2.5 2.5 0 0 1-1.214 2.144l-2.095 1.257c-1.111.667-2.525-.134-2.525-1.429Z"/></svg></div>
+              <!-- nozzle + tip -->
+              <div class="layer" data-depth="front"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M12.5 12.427 10 14.552v1.476l2.095-1.257a.83.83 0 0 0 .405-.715v-1.63ZM7.573 7.5H5.942l-1.4 2.166h1.476L7.573 7.5ZM0 16.875A2.5 2.5 0 1 1 2.5 19.167H.833A.833.833 0 0 1 0 18.333z"/></svg></div>
             </div>
           </span>
         </button>
@@ -522,37 +590,73 @@
     </ul>
   </nav>
 
-  <!-- Main content -->
+  <!-- ── Main content ── -->
   <main data-garden-id="navigation.main">
     <h1 class="content-heading">Hello</h1>
     <p class="content-sub">
       Get help from admin copilot
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
-        <path d="M2.499 11a.5.5 0 0 1 .477.348l.256.797a1.01 1.01 0 0 0 .63.633l.789.248a.5.5 0 0 1 .001.954l-.79.252a1.007 1.007 0 0 0-.63.633l-.252.787a.5.5 0 0 1-.95.008l-.266-.79a1.034 1.034 0 0 0-.636-.639l-.781-.252a.5.5 0 0 1-.002-.95l.794-.26a1.023 1.023 0 0 0 .636-.634l.248-.786A.5.5 0 0 1 2.5 11ZM1 7.513a1 1 0 0 1 .69-.953l2.583-.844a3.95 3.95 0 0 0 2.465-2.457l.808-2.56A1 1 0 0 1 9.452.695l.832 2.598a3.906 3.906 0 0 0 2.448 2.453l2.569.811a1 1 0 0 1 .004 1.906l-2.572.823a3.896 3.896 0 0 0-2.449 2.454l-.82 2.565a1 1 0 0 1-1.9.014l-.866-2.567v-.002A3.971 3.971 0 0 0 4.24 9.284l-2.547-.821A1 1 0 0 1 1 7.513Z"/>
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="#8b5cf6">
+        <path d="M10.7981 2.2605C10.6924 1.90802 10.368 1.66663 9.99996 1.66663C9.63196 1.66663 9.30754 1.90802 9.20179 2.2605C8.60229 4.25868 7.82526 5.68364 6.75445 6.75445C5.68364 7.82526 4.25868 8.60229 2.2605 9.20179C1.90802 9.30754 1.66663 9.63196 1.66663 9.99996C1.66663 10.368 1.90802 10.6924 2.2605 10.7981C4.25868 11.3976 5.68364 12.1746 6.75445 13.2455C7.82526 14.3163 8.60229 15.7412 9.20179 17.7394C9.30754 18.0919 9.63196 18.3333 9.99996 18.3333C10.368 18.3333 10.6924 18.0919 10.7981 17.7394C11.3976 15.7412 12.1746 14.3163 13.2455 13.2455C14.3163 12.1746 15.7412 11.3976 17.7394 10.7981C18.0919 10.6924 18.3333 10.368 18.3333 9.99996C18.3333 9.63196 18.0919 9.30754 17.7394 9.20179C15.7412 8.60229 14.3163 7.82526 13.2455 6.75445C12.1746 5.68364 11.3976 4.25868 10.7981 2.2605Z"/>
       </svg>
     </p>
     <div class="chips">
-      <div class="chip">What are recommendations?</div>
-      <div class="chip">What should I focus on?</div>
-      <div class="chip">What is auto assist?</div>
-      <div class="chip"><strong>Show more</strong></div>
+      <button class="chip">What are recommendations?</button>
+      <button class="chip">What should I focus on?</button>
+      <button class="chip">What is auto assist?</button>
+      <button class="chip chip-bold">Show more</button>
     </div>
-    <p class="section-title">Latest insights</p>
+
+    <div class="section-header">
+      <span class="section-title">Latest insights</span>
+    </div>
     <div class="card">
-      <div class="card-illo"></div>
-      <div class="card-text">
-        <h3>Not enough data to generate insights</h3>
-        <p>Check back soon to learn about your account.</p>
-        <a href="#">Learn about latest insights ↗</a>
+      <div class="card-insight">
+        <div class="card-illo"></div>
+        <div class="card-text">
+          <h3>Not enough data to generate insights</h3>
+          <p>Check back soon to learn about your account.</p>
+          <a href="#">Learn about latest insights ↗</a>
+        </div>
       </div>
     </div>
-    <p class="section-title">Recommendations</p>
-    <div class="card" style="justify-content:space-between; padding:16px 24px;">
-      <div>
-        <p style="font-size:13px;font-weight:600;margin-bottom:4px;">Review unused macro: share more info::cameras</p>
-        <p style="font-size:12px;color:#68737d;">Help agents find the right macro</p>
+
+    <div class="section-header" style="margin-top:24px;">
+      <span class="section-title">Recommendations</span>
+      <a href="#" class="section-link">View all recommendations</a>
+    </div>
+    <div class="card">
+      <div class="card-row">
+        <div class="card-row-info">
+          <h4>Review unused macro: share more info::cameras</h4>
+          <p>Help agents find the right macro</p>
+          <span class="card-tag">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M14 2H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zM3 9h10v1H3zm0-3h10v1H3z"/></svg>
+            Macros
+          </span>
+        </div>
+        <div class="card-row-actions">
+          <button class="btn-text">View details</button>
+          <button class="btn-more">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="3" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="8" cy="13" r="1.5"/></svg>
+          </button>
+        </div>
       </div>
-      <span style="font-size:13px;color:#1f73b7;cursor:pointer;white-space:nowrap;">View details</span>
+      <div class="card-row">
+        <div class="card-row-info">
+          <h4>Review unused trigger: the producer support ticket</h4>
+          <p>Best practice for account maintenance</p>
+          <span class="card-tag card-tag-teal">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 2a5 5 0 1 1 0 10A5 5 0 0 1 8 3z"/></svg>
+            Triggers
+          </span>
+        </div>
+        <div class="card-row-actions">
+          <button class="btn-text">View details</button>
+          <button class="btn-more">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="3" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="8" cy="13" r="1.5"/></svg>
+          </button>
+        </div>
+      </div>
     </div>
   </main>
 
@@ -560,7 +664,6 @@
 
 <script>
   const TRAVEL = 4;
-
   const DEPTH = {
     shadow: { tx: -0.5, ty: -0.5 },
     back:   { tx: -0.4, ty: -0.4 },
@@ -573,7 +676,8 @@
   };
 
   document.querySelectorAll('[data-parallax]').forEach(btn => {
-    const stage = btn.querySelector('.stage');
+    const stage = btn.querySelector('.stage-20, .stage-nav');
+    if (!stage) return;
     let raf = null, mx = 0, my = 0;
 
     btn.addEventListener('mousemove', e => {
@@ -582,7 +686,6 @@
       my = Math.max(-1, Math.min(1, (e.clientY - r.top   - r.height / 2) / (r.height / 2)));
       if (!raf) raf = requestAnimationFrame(update);
     });
-
     btn.addEventListener('mouseleave', () => {
       mx = 0; my = 0;
       if (!raf) raf = requestAnimationFrame(update);
@@ -600,6 +703,5 @@
     }
   });
 </script>
-
 </body>
 </html>
